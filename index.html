@@ -331,85 +331,1069 @@
 
   <!-- ============ TAB: DOANH THU ============ -->
   <div id="doanhthu" class="tab-panel">
-    <div class="topic-header glossy">
-      <div class="topic-header-left">
-        <div class="topic-icon" style="background:linear-gradient(135deg, var(--c-green), var(--c-green-dark));"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17l6-6 4 4 8-8M21 7v6h-6"/></svg></div>
+<!-- ============ DASHBOARD DOANH THU (BC DTHU THU THÁNG.xlsx) — nhúng bởi Claude, xem nhat-ky-cap-nhat-du-lieu-that.md ============ -->
+<div id="dtapp">
+<style>#dtapp{
+  --dark:#0b3d30; --dark2:#0f4a3a; --gold:#d9a441; --bg:#f3f6f4; --card:#ffffff;
+  --text:#16241f; --muted:#6b7c76; --good:#2f8f5b; --bad:#d64545; --warn:#e0a52f;
+  --danger-bg:#fde5e5; --amber-bg:#fff0d7; --gray-bg:#eef1ee; --green-bg:#e6f4ec;
+  --border:#e4e9e6;
+}
+#dtapp *{box-sizing:border-box;}
+#dtapp{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);}
+#dtapp .layout{display:flex;min-height:100vh;}
+#dtapp .sidebar{width:220px;background:var(--dark);color:#fff;flex-shrink:0;padding:20px 14px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+#dtapp .sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:28px;}
+#dtapp .sidebar .brand .logo{width:36px;height:36px;border-radius:9px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;color:#0b3d30;font-size:18px;}
+#dtapp .sidebar .brand .name{font-weight:700;font-size:15px;}
+#dtapp .sidebar .brand .sub{font-size:10px;letter-spacing:.06em;opacity:.7;}
+#dtapp .navitem{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:9px;color:#cfe3da;font-size:13.5px;font-weight:600;cursor:pointer;margin-bottom:4px;background:transparent;border:none;width:100%;text-align:left;}
+#dtapp .navitem:hover{background:rgba(255,255,255,.08);}
+#dtapp .navitem.active{background:#ffe9b3;color:#0b3d30;}
+#dtapp .illus-box{margin-top:30px;background:rgba(255,255,255,.07);border-radius:10px;padding:14px;font-size:11.5px;line-height:1.5;color:#d9e4df;}
+#dtapp .illus-box b{color:#ffe9b3;}
+#dtapp .main{flex:1;padding:26px 30px 60px;max-width:1400px;}
+#dtapp .pagehead{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:18px;}
+#dtapp .eyebrow{color:var(--gold);font-weight:700;font-size:12px;letter-spacing:.05em;}
+#dtapp h1{margin:4px 0 4px;font-size:30px;}
+#dtapp .subtitle{color:var(--muted);font-size:13.5px;margin:0;}
+#dtapp .status-pill{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:8px 14px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+#dtapp .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+#dtapp .dot.green{background:var(--good);}
+#dtapp .dot.red{background:var(--bad);}
+#dtapp .tabs{display:flex;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:6px;margin-bottom:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+#dtapp .tabgroup{display:flex;gap:6px;}
+#dtapp .tabs button.tabbtn{border:none;background:transparent;padding:10px 16px;border-radius:9px;font-weight:700;font-size:13.5px;color:var(--muted);cursor:pointer;}
+#dtapp .tabs button.tabbtn.on{background:var(--dark);color:#fff;}
+#dtapp .periodtoggle{display:flex;background:var(--gray-bg);border-radius:9px;padding:4px;}
+#dtapp .periodtoggle button{border:none;background:transparent;padding:8px 16px;border-radius:7px;font-weight:700;font-size:13px;cursor:pointer;color:var(--muted);}
+#dtapp .periodtoggle button.on{background:var(--dark);color:#fff;}
+#dtapp .filters{display:flex;gap:12px;flex-wrap:wrap;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:18px;}
+#dtapp .filtercol{display:flex;flex-direction:column;gap:5px;min-width:150px;}
+#dtapp .filtercol label{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+#dtapp .filtercol select{padding:9px 10px;border-radius:8px;border:1px solid var(--border);font-size:13px;background:#fff;color:var(--text);font-weight:600;}
+#dtapp .filtercol .kyfixed{padding:9px 10px;border-radius:8px;border:1px solid var(--border);font-size:13px;background:var(--gray-bg);color:var(--muted);font-weight:600;cursor:default;}
+#dtapp .kpirow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px;}
+#dtapp .kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;}
+#dtapp .kpi .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+#dtapp .kpi .label{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+#dtapp .kpi .delta{font-size:11.5px;font-weight:700;}
+#dtapp .kpi .delta.up{color:var(--good);}
+#dtapp .kpi .delta.down{color:var(--bad);}
+#dtapp .kpi .value{font-size:26px;font-weight:800;margin-bottom:10px;}
+#dtapp .kpi .hist{display:flex;gap:6px;}
+#dtapp .kpi .hist div{flex:1;min-width:0;background:var(--gray-bg);border-radius:7px;padding:6px 7px;font-size:10.5px;}
+#dtapp .kpi .hist b{word-break:break-word;}
+#dtapp .kpi .hist .m{color:var(--muted);display:block;font-size:9.5px;margin-bottom:2px;}
+#dtapp .kpi .hist b{font-size:12px;}
+#dtapp .hist div.cur,#dtapp .blockcard .hist div.cur{background:var(--green-bg);border:1.5px solid var(--good);}
+#dtapp .hist div.cur .m{color:var(--good);font-weight:700;}
+#dtapp .hist div.cur b{color:var(--text);}
+#dtapp .panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px;}
+#dtapp .panel.dark{background:var(--dark);color:#fff;border:none;}
+#dtapp .panelhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+#dtapp .panelhead h2{margin:2px 0 4px;font-size:19px;}
+#dtapp .panelhead .eyebrow2{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--gold);}
+#dtapp .panel.dark .eyebrow2{color:#ffe9b3;}
+#dtapp .panelhead p{margin:0;color:var(--muted);font-size:13px;}
+#dtapp .panel.dark .panelhead p{color:#cfe3da;}
+#dtapp .pill{background:var(--gray-bg);border-radius:20px;padding:7px 13px;font-size:11.5px;font-weight:700;color:var(--muted);white-space:nowrap;}
+#dtapp .decision-total{background:var(--dark2);border-radius:12px;padding:14px 18px;text-align:right;min-width:190px;color:#fff;}
+#dtapp .decision-total .n{font-size:22px;font-weight:800;color:#fff;}
+#dtapp .decision-total .l{font-size:10.5px;opacity:.85;color:#fff;}
+#dtapp table{width:100%;border-collapse:collapse;font-size:12.8px;}
+#dtapp th{text-align:left;color:var(--muted);font-weight:700;font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--border);white-space:nowrap;}
+#dtapp td{padding:11px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+#dtapp .tablewrap{overflow-x:auto;}
+#dtapp .prio{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;margin-bottom:2px;}
+#dtapp .prio.do{background:#f4b8b8;color:#7a1f1f;}
+#dtapp .prio.cam{background:#ffcf8f;color:#7a4a00;}
+#dtapp .prio.vang{background:#ffe9a8;color:#6b5500;}
+#dtapp .prio.xam{background:#dfe4e1;color:#555;}
+#dtapp .tagtxt{font-size:9.5px;font-weight:800;color:var(--muted);text-transform:uppercase;}
+#dtapp .neg{color:var(--bad);font-weight:700;}
+#dtapp .pos{color:var(--good);font-weight:700;}
+#dtapp .up{color:var(--good);}
+#dtapp .down{color:var(--bad);}
+#dtapp .small{color:var(--muted);font-size:11px;}
+#dtapp .bar-outer{background:var(--gray-bg);border-radius:6px;height:8px;width:100px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:6px;}
+#dtapp .bar-inner{background:var(--bad);height:100%;}
+#dtapp .legend-row{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:11.5px;color:var(--muted);}
+#dtapp .legend-row b{color:var(--text);}
+#dtapp .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;}
+#dtapp .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+#dtapp .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+#dtapp .blockcard{border:1px solid var(--border);border-radius:12px;padding:16px;}
+#dtapp .blockcard .bh{display:flex;justify-content:space-between;font-weight:800;font-size:14.5px;margin-bottom:8px;}
+#dtapp .blockcard .share{font-size:11px;color:var(--muted);font-weight:700;}
+#dtapp .blockcard .hist{display:flex;gap:6px;margin:8px 0;}
+#dtapp .blockcard .hist div{flex:1;background:var(--gray-bg);border-radius:7px;padding:5px 6px;font-size:10px;}
+#dtapp .blockcard .growth{font-size:12.5px;font-weight:700;}
+#dtapp .chart{margin-top:10px;}
+#dtapp .chartrow{display:flex;gap:16px;align-items:center;padding:14px 0;border-top:1px solid var(--border);}
+#dtapp .chartrow:first-child{border-top:none;}
+#dtapp .chartinfo{width:150px;flex-shrink:0;}
+#dtapp .chartinfo .l{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;}
+#dtapp .chartinfo .v{font-size:20px;font-weight:800;}
+#dtapp .chartinfo .g{font-size:11.5px;font-weight:700;}
+#dtapp .chartsvgwrap{flex:1;overflow-x:auto;min-width:0;}
+#dtapp .status-badge{font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:20px;display:inline-block;}
+#dtapp .status-badge.ok{background:var(--green-bg);color:var(--good);}
+#dtapp .status-badge.watch{background:var(--amber-bg);color:#8a6100;}
+#dtapp .status-badge.danger{background:var(--danger-bg);color:var(--bad);}
+#dtapp .status-badge.push{background:#fff0d7;color:#b3620a;}
+#dtapp .status-badge.new{background:var(--gray-bg);color:var(--muted);}
+#dtapp .blockcard.basket-active{border-color:var(--gold);background:#fffaf0;box-shadow:0 0 0 2px rgba(217,164,65,.35);}
+#dtapp .rofilters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+#dtapp .rofilters button{border:1px solid var(--border);background:#fff;padding:9px 14px;border-radius:20px;font-size:12.5px;font-weight:700;cursor:pointer;color:var(--text);}
+#dtapp .rofilters button.on{background:var(--dark);color:#fff;border-color:var(--dark);}
+#dtapp .bottleneck-card{border-left:4px solid var(--bad);background:var(--danger-bg);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+#dtapp .bottleneck-card .bt-h{font-weight:800;font-size:13.5px;margin-bottom:4px;}
+#dtapp .bottleneck-card .bt-m{font-size:12px;color:#7a1f1f;}
+#dtapp .scroll-hint{font-size:10.5px;color:var(--muted);text-align:right;margin-top:6px;}
+#dtapp .footnote{color:var(--muted);font-size:11px;margin-top:6px;}
+#dtapp select.qsel{padding:9px 14px;border-radius:9px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-weight:700;font-size:13px;}
+#dtapp .scenario3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px;}
+#dtapp .scard{border:1px solid var(--border);border-radius:12px;padding:14px;}
+#dtapp .scard.reco{border-color:var(--gold);background:#fffaf0;}
+#dtapp .scard .stag{font-size:9.5px;font-weight:800;color:var(--gold);text-transform:uppercase;}
+#dtapp .seq{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;}
+#dtapp .seq .box{flex:1;background:var(--gray-bg);border-radius:8px;padding:8px;text-align:center;font-weight:800;font-size:14px;color:var(--text);}
+#dtapp .note-box{background:var(--amber-bg);border-radius:10px;padding:12px 14px;margin-top:12px;font-size:12.5px;color:var(--text);font-weight:600;}
+@media (max-width:980px){
+#dtapp .layout{flex-direction:column;}
+#dtapp .sidebar{width:100%;height:auto;position:relative;display:flex;flex-wrap:wrap;gap:6px;}
+#dtapp .sidebar .brand{width:100%;}
+#dtapp .main{padding:16px;}
+#dtapp .kpirow{grid-template-columns:repeat(2,minmax(0,1fr));}
+#dtapp .grid2,#dtapp .grid3,#dtapp .grid4,#dtapp .scenario3{grid-template-columns:minmax(0,1fr);}
+#dtapp .tablewrap{position:relative;}
+#dtapp .tablewrap::before{content:"→ Vuốt ngang để xem đủ bảng";display:block;font-size:10.5px;color:var(--muted);margin-bottom:6px;font-weight:600;}
+#dtapp table{min-width:640px;}
+#dtapp .status-pill{white-space:normal;max-width:100%;}
+}</style>
+<div id="app"></div>
+<script>
+window.DATA = {"meta": {"thang_hien_tai": "T8", "nam": 2026, "ngay_da_co": 15, "ngay_trong_thang": 31, "tuan_hien_tai": "W33", "ngay_cap_nhat": "15/08/2026", "tuan_note": "W33 · 10/8–16/8 dự kiến — đã có 6/7 ngày"}, "week_labels": ["W30 · 20/7–26/7", "W31 · 27/7–2/8", "W32 · 3/8–9/8", "W33 · 10/8–16/8"], "month_labels_full": ["01/2026", "02/2026", "03/2026", "04/2026", "05/2026", "06/2026", "07/2026", "08/2026"], "mien_rev_month_full": [424.57, 327.62, 411.36, 439.0, 477.08, 473.72, 424.8, 448.61], "mien_bill_month_full": [116533, 88001, 118416, 128819, 136103, 140706, 120840, 124170], "mien_rev_month": [406.8, 424.79, 448.61], "mien_rev_week": [96.66, 95.79, 99.21, 101.3], "mien_bill_month": [120905, 120841, 124170], "mien_fresh_month": [5028240.7, 5354122.4, 5826117.4], "mien_target": 446.05, "cat3": {"fmcg": 0.5476, "fresh": 0.3436, "dongmat": 0.1088}, "khoi_hist": {"fmcg": [254.77, 224.87, 241.88], "fresh": [162.88, 148.01, 151.78], "dongmat": [52.48, 46.26, 48.06]}, "fresh4": [{"name": "Trái Cây Các Loại", "share": 0.1904, "g": 10.09, "hist": [24.96, 26.26, 28.9], "sl_t8": 1377484.6}, {"name": "Thịt Gia Cầm Gia Súc Các Loại", "share": 0.4202, "g": 2.02, "hist": [70.21, 62.52, 63.78], "sl_t8": 825180.4}, {"name": "Rau Củ Các Loại", "share": 0.2607, "g": 5.29, "hist": [44.12, 37.58, 39.57], "sl_t8": 3234426.7}, {"name": "Thủy Hải Sản Các Loại", "share": 0.1287, "g": -9.81, "hist": [23.59, 21.66, 19.53], "sl_t8": 389026.0}], "top_tang_thang": [{"name": "Trái cây ngoại CL", "khoi": "FRESH", "truoc": 9.00167354, "sau": 11.928172591, "pct": 32.51}, {"name": "Bia", "khoi": "FMCG", "truoc": 18.057643722, "sau": 20.643536254333338, "pct": 14.32}, {"name": "Cà phê hòa tan", "khoi": "FMCG", "truoc": 4.45477056, "sau": 6.0482623408, "pct": 35.77}, {"name": "Sữa Tiệt Trùng", "khoi": "FMCG", "truoc": 15.422177489, "sau": 16.684567252866668, "pct": 8.19}, {"name": "Củ quả CL", "khoi": "FRESH", "truoc": 14.367235553, "sau": 15.477200725533335, "pct": 7.73}], "top_giam_thang": [{"name": "Thủy Sản Chế Biến", "khoi": "FRESH", "truoc": 6.984654943, "sau": 5.9586364138666665, "pct": -14.69}, {"name": "Cá nước ngọt", "khoi": "FRESH", "truoc": 6.192727412, "sau": 5.707042309, "pct": -7.84}, {"name": "Cá biển", "khoi": "FRESH", "truoc": 4.525500572, "sau": 4.1371447482, "pct": -8.58}, {"name": "Trái cây nội CL", "khoi": "FRESH", "truoc": 17.254323636, "sau": 16.975836127, "pct": -1.61}, {"name": "Kem Hộp", "khoi": "ĐM", "truoc": 1.648647064, "sau": 1.3983833958, "pct": -15.18}], "top_tang_tuan": [{"name": "Trái cây nội CL", "khoi": "FRESH", "truoc": 3.492826031, "sau": 4.2683995375, "pct": 22.2}, {"name": "Mì ăn liền", "khoi": "FMCG", "truoc": 3.790475466, "sau": 4.4525174785, "pct": 17.47}, {"name": "Trái cây ngoại CL", "khoi": "FRESH", "truoc": 2.432016543, "sau": 3.093547000833333, "pct": 27.2}, {"name": "Cá nước ngọt", "khoi": "FRESH", "truoc": 1.122158184, "sau": 1.4399304931666665, "pct": 28.32}, {"name": "Gạo, nếp các loại", "khoi": "FMCG", "truoc": 2.105009954, "sau": 2.298960802833333, "pct": 9.21}], "top_giam_tuan": [{"name": "Bia", "khoi": "FMCG", "truoc": 5.089295137, "sau": 3.571957982833333, "pct": -29.81}, {"name": "Kem Cây", "khoi": "ĐM", "truoc": 1.789123847, "sau": 1.4561722046666665, "pct": -18.61}, {"name": "Trứng gia cầm các loại", "khoi": "FRESH", "truoc": 2.880247386, "sau": 2.573175229333333, "pct": -10.66}, {"name": "Sữa Chua CL", "khoi": "ĐM", "truoc": 2.526217537, "sau": 2.240125553166667, "pct": -11.32}, {"name": "Thịt Heo Các Loại", "khoi": "FRESH", "truoc": 8.395417466, "sau": 8.267986997666666, "pct": -1.52}], "basket_list": [{"key": "kingfood", "label": "KingFood", "icon": "👑", "n": 25, "rev": 62.33, "rev_prev": 58.98}, {"key": "maxidi", "label": "Maxidi", "icon": "🛒", "n": 9, "rev": 26.73, "rev_prev": 25.17}, {"key": "cho", "label": "Gần chợ truyền thống", "icon": "🏪", "n": 34, "rev": 92.65, "rev_prev": 88.11}, {"key": "tuidancu", "label": "Shop nằm trong Cụm DC", "icon": "🏘️", "n": 141, "rev": 266.9, "rev_prev": 252.43}], "qltp": [{"code": "21445", "name": "Tấn Phát", "rev_month": [25.9, 27.45, 28.64], "bill_month": [8024, 8181, 8317], "fresh_month": [317911.6, 358951.7, 390761.3], "target_month": 28.83, "growth_pct": 4.33, "bill_growth": 1.67, "rev_week": [6.26, 6.29, 6.43, 6.39], "bill_week": [8231, 8190, 8198, 8399], "fresh_week": [83178.9, 82271.9, 83798.4, 95379.6], "abv_growth": 2.66}, {"code": "55321", "name": "Cẩm Trinh", "rev_month": [33.78, 36.21, 37.67], "bill_month": [10561, 10869, 11031], "fresh_month": [424970.5, 459446.3, 495943.1], "target_month": 38.02, "growth_pct": 4.03, "bill_growth": 1.49, "rev_week": [8.19, 8.2, 8.41, 8.44], "bill_week": [10839, 10863, 10859, 11152], "fresh_week": [106622.8, 103975.1, 108510.1, 118038.7], "abv_growth": 2.54}, {"code": "27506", "name": "Bá Thành", "rev_month": [31.56, 32.88, 34.58], "bill_month": [8904, 9106, 9395], "fresh_month": [344038.6, 394114.6, 438258.0], "target_month": 34.52, "growth_pct": 5.18, "bill_growth": 3.18, "rev_week": [7.45, 7.22, 7.6, 7.91], "bill_week": [9234, 9048, 9311, 9417], "fresh_week": [92364.3, 90777.7, 95530.4, 104730.2], "abv_growth": 2.0}, {"code": "43052", "name": "Thanh Nga", "rev_month": [35.06, 37.29, 39.32], "bill_month": [9647, 9640, 9869], "fresh_month": [349492.7, 360672.7, 390136.9], "target_month": 39.16, "growth_pct": 5.44, "bill_growth": 2.38, "rev_week": [8.76, 8.24, 8.44, 9.05], "bill_week": [9690, 9570, 9680, 9898], "fresh_week": [86154.6, 81776.6, 85896.8, 92040.2], "abv_growth": 3.06}, {"code": "48431", "name": "Tấn Đạt", "rev_month": [38.34, 40.6, 43.17], "bill_month": [11352, 11525, 11737], "fresh_month": [425305.7, 465348.2, 509916.2], "target_month": 42.63, "growth_pct": 6.35, "bill_growth": 1.84, "rev_week": [9.34, 9.12, 9.63, 9.71], "bill_week": [11634, 11463, 11567, 11832], "fresh_week": [108815.1, 106767.2, 111962.1, 121213.7], "abv_growth": 4.51}, {"code": "49559", "name": "Quốc Liêm", "rev_month": [45.44, 48.33, 51.31], "bill_month": [13920, 14252, 14749], "fresh_month": [668622.8, 721454.3, 781355.0], "target_month": 50.75, "growth_pct": 6.15, "bill_growth": 3.49, "rev_week": [10.95, 11.02, 11.35, 11.71], "bill_week": [14339, 14285, 14446, 15103], "fresh_week": [171339.8, 164463.7, 172321.1, 182890.7], "abv_growth": 2.66}, {"code": "56779", "name": "Xuân Nam", "rev_month": [49.28, 49.65, 52.85], "bill_month": [15197, 14715, 15109], "fresh_month": [562902.5, 570570.8, 643121.3], "target_month": 52.14, "growth_pct": 6.44, "bill_growth": 2.67, "rev_week": [11.22, 11.15, 11.68, 11.87], "bill_week": [14863, 14581, 14881, 15183], "fresh_week": [133797.8, 135128.5, 141352.9, 147895.4], "abv_growth": 3.77}, {"code": "88365", "name": "Đình Thuận", "rev_month": [60.32, 63.44, 67.9], "bill_month": [17238, 16981, 17776], "fresh_month": [770091.4, 797458.3, 870388.9], "target_month": 66.61, "growth_pct": 7.02, "bill_growth": 4.68, "rev_week": [14.53, 14.59, 14.98, 15.26], "bill_week": [17169, 17043, 17456, 18033], "fresh_week": [184555.7, 183721.0, 191969.0, 203957.7], "abv_growth": 2.34}, {"code": "24008", "name": "Minh Nhật", "rev_month": [68.24, 69.59, 73.06], "bill_month": [20633, 20224, 20741], "fresh_month": [898856.0, 944618.6, 1008316.9], "target_month": 73.07, "growth_pct": 4.99, "bill_growth": 2.56, "rev_week": [15.63, 15.64, 16.2, 16.42], "bill_week": [20279, 19993, 20451, 20970], "fresh_week": [216627.9, 212411.1, 222079.6, 235756.9], "abv_growth": 2.43}, {"code": "122824", "name": "Ngọc Anh", "rev_month": [9.1, 9.43, 9.83], "bill_month": [2489, 2475, 2513], "fresh_month": [119731.2, 130148.0, 139147.1], "target_month": 9.91, "growth_pct": 4.15, "bill_growth": 1.5, "rev_week": [2.09, 2.14, 2.2, 2.21], "bill_week": [2469, 2478, 2474, 2550], "fresh_week": [30852.3, 30494.5, 30252.3, 32929.5], "abv_growth": 2.65}, {"code": "84687", "name": "Thành Sự", "rev_month": [9.78, 9.92, 10.28], "bill_month": [2940, 2873, 2933], "fresh_month": [146317.7, 151338.9, 158772.7], "target_month": 10.41, "growth_pct": 3.61, "bill_growth": 2.08, "rev_week": [2.24, 2.18, 2.29, 2.33], "bill_week": [2900, 2805, 2894, 2989], "fresh_week": [36793.0, 34372.1, 34892.5, 37045.1], "abv_growth": 1.53}], "stores": [{"id": 29935, "name": "BHX_HCM_ALA - 659 Kinh Dương Vương", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "New2026", "rev": 0.937, "rev_prev": 0.829, "target": 0.87, "growth": 13.08, "bill": 4094, "gia_tri_bill": 110745, "fresh_sl": 13176.2, "canh_bao_goc": "Về đích", "rev_week": [0.191, 0.185, 0.223, 0.204], "bill_week": [258, 247, 275, 278]}, {"id": 31369, "name": "BHX_HCM_ALA - 97 An Dương Vương", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "cho", "quan": "BTA", "moi_cu": "New2026", "rev": 1.007, "rev_prev": 0.954, "target": 1.001, "growth": 5.6, "bill": 4534, "gia_tri_bill": 107480, "fresh_sl": 13829.3, "canh_bao_goc": "Về đích", "rev_week": [0.216, 0.212, 0.217, 0.236], "bill_week": [284, 282, 284, 321]}, {"id": 28923, "name": "BHX_HCM_ALA - Chung cư Akaneo 0.06", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "New2026", "rev": 0.854, "rev_prev": 0.723, "target": 0.76, "growth": 18.05, "bill": 3964, "gia_tri_bill": 104252, "fresh_sl": 11626.9, "canh_bao_goc": "Về đích", "rev_week": [0.166, 0.179, 0.195, 0.186], "bill_week": [244, 247, 262, 266]}, {"id": 30246, "name": "BHX_HCM_ALA - Khu Y Tế Kỹ Thuật Cao", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "New2026", "rev": 1.846, "rev_prev": 1.793, "target": 1.882, "growth": 2.99, "bill": 8667, "gia_tri_bill": 103078, "fresh_sl": 24745.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.414, 0.413, 0.406, 0.416], "bill_week": [579, 587, 569, 574]}, {"id": 30392, "name": "BHX_HCM_BLT - 245 Nguyễn Thượng Hiền", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 0.891, "rev_prev": 0.805, "target": 0.846, "growth": 10.69, "bill": 4580, "gia_tri_bill": 94171, "fresh_sl": 13587.7, "canh_bao_goc": "Về đích", "rev_week": [0.186, 0.187, 0.207, 0.197], "bill_week": [300, 287, 315, 297]}, {"id": 15743, "name": "BHX_HCM_BLT - 399 Phan Văn Trị", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 1.322, "rev_prev": 1.275, "target": 1.339, "growth": 3.68, "bill": 6143, "gia_tri_bill": 104128, "fresh_sl": 18491.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.276, 0.294, 0.306, 0.29], "bill_week": [398, 402, 403, 416]}, {"id": 30992, "name": "BHX_HCM_BLT - 449B Lê Quang Định", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 0.721, "rev_prev": 0.243, "target": 0.256, "growth": 196.36, "bill": 3548, "gia_tri_bill": 98390, "fresh_sl": 9935.9, "canh_bao_goc": "Mới mở / bất thường", "rev_week": [0.163, 0.122, 0.162, 0.169], "bill_week": [201, 186, 231, 250]}, {"id": 15878, "name": "BHX_HCM_BTA - 09 Nguyễn Quý Yêm", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 0.99, "rev_prev": 0.955, "target": 1.002, "growth": 3.67, "bill": 5054, "gia_tri_bill": 94737, "fresh_sl": 10391.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.218, 0.208, 0.215, 0.234], "bill_week": [337, 327, 324, 356]}, {"id": 1694, "name": "BHX_HCM_BTA - 11 Miếu Gò Xoài", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.681, "rev_prev": 1.732, "target": 1.819, "growth": -2.99, "bill": 7242, "gia_tri_bill": 112296, "fresh_sl": 19032.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.374, 0.413, 0.372, 0.38], "bill_week": [485, 475, 475, 480]}, {"id": 29938, "name": "BHX_HCM_BTA - 118 Bình Thành", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "cho", "quan": "BTA", "moi_cu": "New2026", "rev": 1.665, "rev_prev": 1.645, "target": 1.727, "growth": 1.23, "bill": 6674, "gia_tri_bill": 120695, "fresh_sl": 17041.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.371, 0.38, 0.352, 0.369], "bill_week": [439, 454, 427, 444]}, {"id": 7588, "name": "BHX_HCM_BTA - 123 Liên Khu 5-6", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 4.516, "rev_prev": 4.05, "target": 4.253, "growth": 11.49, "bill": 16789, "gia_tri_bill": 130152, "fresh_sl": 41653.8, "canh_bao_goc": "Về đích", "rev_week": [0.93, 0.891, 0.911, 1.156], "bill_week": [1101, 1088, 1083, 1147]}, {"id": 2144, "name": "BHX_HCM_BTA - 123 Đường Số 11", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.303, "rev_prev": 2.177, "target": 2.286, "growth": 5.8, "bill": 9217, "gia_tri_bill": 120905, "fresh_sl": 21228.3, "canh_bao_goc": "Về đích", "rev_week": [0.49, 0.505, 0.502, 0.521], "bill_week": [624, 624, 605, 604]}, {"id": 1561, "name": "BHX_HCM_BTA - 129 Đường số 4", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.283, "rev_prev": 1.764, "target": 1.852, "growth": 29.44, "bill": 6362, "gia_tri_bill": 173658, "fresh_sl": 15281.9, "canh_bao_goc": "Về đích", "rev_week": [0.559, 0.341, 0.51, 0.531], "bill_week": [427, 396, 423, 431]}, {"id": 1521, "name": "BHX_HCM_BTA - 131 Chiến Lược", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.221, "rev_prev": 1.192, "target": 1.251, "growth": 2.45, "bill": 6195, "gia_tri_bill": 95351, "fresh_sl": 16762.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.263, 0.271, 0.267, 0.273], "bill_week": [407, 405, 404, 417]}, {"id": 1642, "name": "BHX_HCM_BTA - 132 Liên khu 10-11", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.485, "rev_prev": 1.354, "target": 1.422, "growth": 9.63, "bill": 7360, "gia_tri_bill": 97622, "fresh_sl": 17204.8, "canh_bao_goc": "Về đích", "rev_week": [0.314, 0.322, 0.337, 0.331], "bill_week": [471, 488, 494, 482]}, {"id": 4345, "name": "BHX_HCM_BTA - 135B -135C Bình Long", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "kingfood", "quan": "BTA", "moi_cu": "OLD", "rev": 3.819, "rev_prev": 3.486, "target": 3.66, "growth": 9.56, "bill": 14672, "gia_tri_bill": 125939, "fresh_sl": 43863.2, "canh_bao_goc": "Về đích", "rev_week": [0.788, 0.788, 0.845, 0.88], "bill_week": [939, 933, 965, 991]}, {"id": 1829, "name": "BHX_HCM_BTA - 138 Đường số 6", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.216, "rev_prev": 2.132, "target": 2.239, "growth": 3.91, "bill": 8442, "gia_tri_bill": 126993, "fresh_sl": 23634.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.476, 0.482, 0.496, 0.487], "bill_week": [552, 552, 557, 565]}, {"id": 2103, "name": "BHX_HCM_BTA - 14 Đường số 2", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.469, "rev_prev": 2.454, "target": 2.577, "growth": 0.62, "bill": 9864, "gia_tri_bill": 121130, "fresh_sl": 26391.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.552, 0.524, 0.566, 0.538], "bill_week": [654, 645, 654, 656]}, {"id": 2251, "name": "BHX_HCM_BTA - 143 Liên khu 5-6", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.279, "rev_prev": 1.162, "target": 1.22, "growth": 10.12, "bill": 6346, "gia_tri_bill": 97536, "fresh_sl": 13698.3, "canh_bao_goc": "Về đích", "rev_week": [0.276, 0.266, 0.28, 0.294], "bill_week": [404, 397, 422, 411]}, {"id": 5804, "name": "BHX_HCM_BTA - 143 Phạm Đăng Giảng", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 3.141, "rev_prev": 3.076, "target": 3.229, "growth": 2.13, "bill": 12626, "gia_tri_bill": 120383, "fresh_sl": 40837.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.705, 0.701, 0.696, 0.697], "bill_week": [813, 816, 825, 848]}, {"id": 1935, "name": "BHX_HCM_BTA - 146 Đường số 5", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.728, "rev_prev": 1.634, "target": 1.716, "growth": 5.73, "bill": 6652, "gia_tri_bill": 125681, "fresh_sl": 19595.6, "canh_bao_goc": "Về đích", "rev_week": [0.362, 0.379, 0.38, 0.386], "bill_week": [427, 436, 433, 451]}, {"id": 1630, "name": "BHX_HCM_BTA - 15 Đường 5C", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.147, "rev_prev": 1.072, "target": 1.126, "growth": 7.0, "bill": 5081, "gia_tri_bill": 109275, "fresh_sl": 11582.0, "canh_bao_goc": "Về đích", "rev_week": [0.249, 0.253, 0.258, 0.257], "bill_week": [346, 327, 341, 344]}, {"id": 3999, "name": "BHX_HCM_BTA - 159 Chiến Lược", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 3.337, "rev_prev": 3.103, "target": 3.258, "growth": 7.53, "bill": 13449, "gia_tri_bill": 120057, "fresh_sl": 43570.6, "canh_bao_goc": "Về đích", "rev_week": [0.707, 0.718, 0.74, 0.747], "bill_week": [870, 876, 867, 923]}, {"id": 14428, "name": "BHX_HCM_BTA - 162 – 164 Đường Số 1", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 0.769, "rev_prev": 0.75, "target": 0.788, "growth": 2.51, "bill": 3573, "gia_tri_bill": 104159, "fresh_sl": 10450.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.18, 0.174, 0.168, 0.178], "bill_week": [243, 243, 230, 249]}, {"id": 1992, "name": "BHX_HCM_BTA - 164 Bùi Tư Toàn", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.289, "rev_prev": 2.097, "target": 2.202, "growth": 9.12, "bill": 10409, "gia_tri_bill": 106389, "fresh_sl": 26028.2, "canh_bao_goc": "Về đích", "rev_week": [0.477, 0.496, 0.522, 0.489], "bill_week": [663, 680, 694, 680]}, {"id": 6403, "name": "BHX_HCM_BTA - 172 Đường Số 8", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.76, "rev_prev": 2.684, "target": 2.818, "growth": 2.85, "bill": 11474, "gia_tri_bill": 116407, "fresh_sl": 32936.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.616, 0.608, 0.6, 0.638], "bill_week": [767, 764, 739, 792]}, {"id": 1832, "name": "BHX_HCM_BTA - 1732 Tỉnh Lộ 10", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 4.084, "rev_prev": 3.934, "target": 4.13, "growth": 3.83, "bill": 15296, "gia_tri_bill": 129201, "fresh_sl": 57190.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.897, 0.863, 0.894, 0.924], "bill_week": [994, 971, 1011, 1018]}, {"id": 1157, "name": "BHX_HCM_BTA - 175 Lê Đình Cẩn", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 3.98, "rev_prev": 3.649, "target": 3.832, "growth": 9.07, "bill": 15695, "gia_tri_bill": 122702, "fresh_sl": 49806.2, "canh_bao_goc": "Về đích", "rev_week": [0.833, 0.816, 0.859, 0.915], "bill_week": [988, 979, 1025, 1048]}, {"id": 1531, "name": "BHX_HCM_BTA - 175 Đường số 8", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.378, "rev_prev": 2.356, "target": 2.474, "growth": 0.95, "bill": 10616, "gia_tri_bill": 108411, "fresh_sl": 25036.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.545, 0.503, 0.541, 0.522], "bill_week": [728, 702, 716, 690]}, {"id": 1864, "name": "BHX_HCM_BTA - 18 Phạm Đăng Giảng", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 3.859, "rev_prev": 3.611, "target": 3.792, "growth": 6.86, "bill": 13890, "gia_tri_bill": 134425, "fresh_sl": 41123.2, "canh_bao_goc": "Về đích", "rev_week": [0.823, 0.796, 0.866, 0.851], "bill_week": [898, 870, 902, 931]}, {"id": 1699, "name": "BHX_HCM_BTA - 19/97B Đường Lô Tư", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.718, "rev_prev": 1.611, "target": 1.691, "growth": 6.69, "bill": 7838, "gia_tri_bill": 106078, "fresh_sl": 19083.2, "canh_bao_goc": "Về đích", "rev_week": [0.372, 0.366, 0.371, 0.397], "bill_week": [517, 495, 518, 528]}, {"id": 10137, "name": "BHX_HCM_BTA - 199 Trần Thanh Mại", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.204, "rev_prev": 2.091, "target": 2.195, "growth": 5.41, "bill": 9863, "gia_tri_bill": 108127, "fresh_sl": 31818.4, "canh_bao_goc": "Về đích", "rev_week": [0.476, 0.451, 0.485, 0.507], "bill_week": [665, 640, 657, 653]}, {"id": 1489, "name": "BHX_HCM_BTA - 2 Đường 16", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.77, "rev_prev": 1.648, "target": 1.731, "growth": 7.36, "bill": 8068, "gia_tri_bill": 106145, "fresh_sl": 18784.7, "canh_bao_goc": "Về đích", "rev_week": [0.358, 0.366, 0.393, 0.408], "bill_week": [517, 516, 533, 541]}, {"id": 3400, "name": "BHX_HCM_BTA - 20 Hồ Văn Long", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.438, "rev_prev": 2.34, "target": 2.457, "growth": 4.19, "bill": 11041, "gia_tri_bill": 106865, "fresh_sl": 29045.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.546, 0.52, 0.552, 0.539], "bill_week": [744, 724, 730, 729]}, {"id": 161, "name": "BHX_HCM_BTA - 20 Trương Phước Phan", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.5, "rev_prev": 1.481, "target": 1.555, "growth": 1.23, "bill": 6942, "gia_tri_bill": 104531, "fresh_sl": 24646.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.338, 0.323, 0.333, 0.349], "bill_week": [473, 454, 446, 483]}, {"id": 1374, "name": "BHX_HCM_BTA - 201 Gò Xoài", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.954, "rev_prev": 2.814, "target": 2.955, "growth": 4.96, "bill": 12105, "gia_tri_bill": 118077, "fresh_sl": 36583.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.625, 0.646, 0.661, 0.65], "bill_week": [790, 794, 808, 800]}, {"id": 1970, "name": "BHX_HCM_BTA - 223 Liên Khu 4-5", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.25, "rev_prev": 2.274, "target": 2.387, "growth": -1.04, "bill": 6687, "gia_tri_bill": 162796, "fresh_sl": 15476.4, "canh_bao_goc": "Theo dõi", "rev_week": [0.575, 0.411, 0.363, 0.644], "bill_week": [437, 438, 424, 456]}, {"id": 1257, "name": "BHX_HCM_BTA - 261 Lê Đình Cẩn", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.072, "rev_prev": 1.934, "target": 2.031, "growth": 7.14, "bill": 9337, "gia_tri_bill": 107375, "fresh_sl": 26329.1, "canh_bao_goc": "Về đích", "rev_week": [0.435, 0.436, 0.453, 0.477], "bill_week": [613, 599, 614, 630]}, {"id": 6370, "name": "BHX_HCM_BTA - 27 Đường Số 5", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.188, "rev_prev": 2.105, "target": 2.211, "growth": 3.91, "bill": 10128, "gia_tri_bill": 104523, "fresh_sl": 26898.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.483, 0.463, 0.484, 0.501], "bill_week": [700, 659, 666, 671]}, {"id": 1696, "name": "BHX_HCM_BTA - 287 Phan Anh", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.555, "rev_prev": 2.403, "target": 2.523, "growth": 6.32, "bill": 11043, "gia_tri_bill": 111935, "fresh_sl": 33760.9, "canh_bao_goc": "Về đích", "rev_week": [0.577, 0.558, 0.573, 0.56], "bill_week": [739, 717, 722, 746]}, {"id": 1418, "name": "BHX_HCM_BTA - 29 Ao Đôi", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.834, "rev_prev": 1.763, "target": 1.851, "growth": 4.06, "bill": 8225, "gia_tri_bill": 107906, "fresh_sl": 23534.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.404, 0.39, 0.402, 0.423], "bill_week": [549, 550, 537, 556]}, {"id": 10110, "name": "BHX_HCM_BTA - 295 Tân Hoà Đông", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.697, "rev_prev": 1.628, "target": 1.71, "growth": 4.22, "bill": 8058, "gia_tri_bill": 101890, "fresh_sl": 21086.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.371, 0.365, 0.376, 0.389], "bill_week": [529, 541, 526, 543]}, {"id": 9215, "name": "BHX_HCM_BTA - 36 Đường số 54", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.07, "rev_prev": 2.031, "target": 2.133, "growth": 1.9, "bill": 8506, "gia_tri_bill": 117749, "fresh_sl": 29028.1, "canh_bao_goc": "Theo dõi", "rev_week": [0.465, 0.459, 0.45, 0.484], "bill_week": [589, 582, 557, 576]}, {"id": 2024, "name": "BHX_HCM_BTA - 36 Đường số 8", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.611, "rev_prev": 1.553, "target": 1.631, "growth": 3.71, "bill": 7561, "gia_tri_bill": 103095, "fresh_sl": 24729.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.351, 0.352, 0.347, 0.371], "bill_week": [504, 502, 494, 505]}, {"id": 3818, "name": "BHX_HCM_BTA - 390/65/55 Quốc Lộ 1A", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.206, "rev_prev": 2.095, "target": 2.199, "growth": 5.32, "bill": 8303, "gia_tri_bill": 128562, "fresh_sl": 25361.2, "canh_bao_goc": "Về đích", "rev_week": [0.474, 0.462, 0.511, 0.478], "bill_week": [544, 525, 555, 554]}, {"id": 191, "name": "BHX_HCM_BTA - 393 Hương Lộ 3", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "kingfood", "quan": "BTA", "moi_cu": "OLD", "rev": 4.049, "rev_prev": 3.841, "target": 4.033, "growth": 5.42, "bill": 14325, "gia_tri_bill": 136781, "fresh_sl": 55114.4, "canh_bao_goc": "Về đích", "rev_week": [0.872, 0.864, 0.915, 0.886], "bill_week": [938, 930, 949, 952]}, {"id": 10136, "name": "BHX_HCM_BTA - 396 Hồ Học Lãm", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 5.176, "rev_prev": 5.025, "target": 5.276, "growth": 3.01, "bill": 18239, "gia_tri_bill": 137316, "fresh_sl": 59086.5, "canh_bao_goc": "Theo dõi", "rev_week": [1.153, 1.104, 1.166, 1.166], "bill_week": [1190, 1164, 1202, 1223]}, {"id": 2099, "name": "BHX_HCM_BTA - 423 Bình Thành", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.663, "rev_prev": 2.617, "target": 2.748, "growth": 1.77, "bill": 9600, "gia_tri_bill": 134239, "fresh_sl": 24421.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.818, 0.481, 0.58, 0.637], "bill_week": [639, 624, 628, 640]}, {"id": 3669, "name": "BHX_HCM_BTA - 43A Bình Thành", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 3.344, "rev_prev": 3.061, "target": 3.214, "growth": 9.24, "bill": 12908, "gia_tri_bill": 125355, "fresh_sl": 35679.9, "canh_bao_goc": "Về đích", "rev_week": [0.737, 0.798, 0.672, 0.71], "bill_week": [850, 831, 837, 852]}, {"id": 1969, "name": "BHX_HCM_BTA - 4423 Nguyễn Cửu Phú", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 3.617, "rev_prev": 3.339, "target": 3.506, "growth": 8.34, "bill": 11904, "gia_tri_bill": 147027, "fresh_sl": 46340.6, "canh_bao_goc": "Về đích", "rev_week": [0.74, 0.711, 0.784, 0.86], "bill_week": [747, 730, 791, 806]}, {"id": 1865, "name": "BHX_HCM_BTA - 4525 Nguyễn Cửu Phú", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "kingfood", "quan": "BTA", "moi_cu": "OLD", "rev": 2.124, "rev_prev": 1.963, "target": 2.061, "growth": 8.22, "bill": 8903, "gia_tri_bill": 115439, "fresh_sl": 25975.8, "canh_bao_goc": "Về đích", "rev_week": [0.452, 0.444, 0.466, 0.482], "bill_week": [559, 565, 601, 581]}, {"id": 1610, "name": "BHX_HCM_BTA - 456 Lê Văn Quới", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 3.467, "rev_prev": 3.343, "target": 3.51, "growth": 3.72, "bill": 13377, "gia_tri_bill": 125416, "fresh_sl": 45889.4, "canh_bao_goc": "Theo dõi", "rev_week": [0.739, 0.772, 0.769, 0.779], "bill_week": [878, 885, 876, 904]}, {"id": 1942, "name": "BHX_HCM_BTA - 46 Tên Lửa", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.671, "rev_prev": 1.69, "target": 1.775, "growth": -1.15, "bill": 7636, "gia_tri_bill": 105886, "fresh_sl": 21470.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.374, 0.376, 0.353, 0.392], "bill_week": [515, 529, 482, 533]}, {"id": 1451, "name": "BHX_HCM_BTA - 47 Đường 18B", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.968, "rev_prev": 1.833, "target": 1.924, "growth": 7.37, "bill": 7729, "gia_tri_bill": 123190, "fresh_sl": 23439.7, "canh_bao_goc": "Về đích", "rev_week": [0.405, 0.415, 0.487, 0.397], "bill_week": [517, 512, 509, 510]}, {"id": 202, "name": "BHX_HCM_BTA - 473/4A Tỉnh Lộ 10", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "kingfood", "quan": "BTA", "moi_cu": "OLD", "rev": 1.617, "rev_prev": 1.495, "target": 1.569, "growth": 8.16, "bill": 6975, "gia_tri_bill": 112147, "fresh_sl": 21315.9, "canh_bao_goc": "Về đích", "rev_week": [0.358, 0.349, 0.365, 0.36], "bill_week": [456, 437, 464, 470]}, {"id": 14362, "name": "BHX_HCM_BTA - 50 Trương Phước Phan", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.003, "rev_prev": 0.973, "target": 1.022, "growth": 3.08, "bill": 5003, "gia_tri_bill": 97052, "fresh_sl": 13243.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.226, 0.219, 0.231, 0.228], "bill_week": [355, 340, 336, 326]}, {"id": 10125, "name": "BHX_HCM_BTA - 532 Tỉnh Lộ 10", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.295, "rev_prev": 1.223, "target": 1.284, "growth": 5.93, "bill": 6223, "gia_tri_bill": 100706, "fresh_sl": 18643.2, "canh_bao_goc": "Về đích", "rev_week": [0.284, 0.282, 0.291, 0.294], "bill_week": [408, 398, 408, 432]}, {"id": 2046, "name": "BHX_HCM_BTA - 54 Trần Đại Nghĩa", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 3.825, "rev_prev": 3.658, "target": 3.841, "growth": 4.57, "bill": 13841, "gia_tri_bill": 133708, "fresh_sl": 39890.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.798, 0.774, 0.837, 0.874], "bill_week": [878, 872, 907, 934]}, {"id": 6835, "name": "BHX_HCM_BTA - 56 Nguyễn Thức Tự", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.363, "rev_prev": 2.09, "target": 2.194, "growth": 13.07, "bill": 10689, "gia_tri_bill": 106980, "fresh_sl": 25961.2, "canh_bao_goc": "Về đích", "rev_week": [0.494, 0.492, 0.541, 0.522], "bill_week": [675, 695, 713, 706]}, {"id": 2004, "name": "BHX_HCM_BTA - 574 SINCO", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.814, "rev_prev": 2.677, "target": 2.811, "growth": 5.12, "bill": 12070, "gia_tri_bill": 112826, "fresh_sl": 34772.0, "canh_bao_goc": "Về đích", "rev_week": [0.617, 0.596, 0.614, 0.636], "bill_week": [805, 790, 784, 807]}, {"id": 2192, "name": "BHX_HCM_BTA - 6 Đường Số 40", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.341, "rev_prev": 2.277, "target": 2.391, "growth": 2.79, "bill": 9703, "gia_tri_bill": 116743, "fresh_sl": 28112.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.519, 0.5, 0.533, 0.517], "bill_week": [633, 628, 639, 658]}, {"id": 1532, "name": "BHX_HCM_BTA - 601 Tên Lửa", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.92, "rev_prev": 1.864, "target": 1.957, "growth": 2.99, "bill": 8085, "gia_tri_bill": 114886, "fresh_sl": 30524.1, "canh_bao_goc": "Theo dõi", "rev_week": [0.407, 0.427, 0.434, 0.431], "bill_week": [537, 532, 536, 549]}, {"id": 2835, "name": "BHX_HCM_BTA - 63 Đường Số 29", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.684, "rev_prev": 1.569, "target": 1.648, "growth": 7.29, "bill": 8498, "gia_tri_bill": 95876, "fresh_sl": 26391.5, "canh_bao_goc": "Về đích", "rev_week": [0.357, 0.374, 0.38, 0.374], "bill_week": [527, 555, 561, 567]}, {"id": 9190, "name": "BHX_HCM_BTA - 66 Đường số 1", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.606, "rev_prev": 1.586, "target": 1.666, "growth": 1.26, "bill": 7249, "gia_tri_bill": 107223, "fresh_sl": 21528.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.374, 0.353, 0.345, 0.372], "bill_week": [486, 469, 476, 490]}, {"id": 2236, "name": "BHX_HCM_BTA - 66/18 Bình Thành", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "kingfood", "quan": "BTA", "moi_cu": "OLD", "rev": 4.56, "rev_prev": 4.297, "target": 4.511, "growth": 6.14, "bill": 14250, "gia_tri_bill": 154853, "fresh_sl": 38844.2, "canh_bao_goc": "Về đích", "rev_week": [0.939, 0.981, 0.992, 1.033], "bill_week": [914, 930, 930, 954]}, {"id": 2130, "name": "BHX_HCM_BTA - 690A Hương Lộ 2", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.774, "rev_prev": 1.702, "target": 1.787, "growth": 4.27, "bill": 7657, "gia_tri_bill": 112130, "fresh_sl": 23307.1, "canh_bao_goc": "Theo dõi", "rev_week": [0.386, 0.38, 0.399, 0.391], "bill_week": [517, 498, 505, 515]}, {"id": 1861, "name": "BHX_HCM_BTA - 82A Bình Trị Đông", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 4.756, "rev_prev": 4.772, "target": 5.011, "growth": -0.33, "bill": 18505, "gia_tri_bill": 124362, "fresh_sl": 64595.5, "canh_bao_goc": "Theo dõi", "rev_week": [1.086, 1.064, 1.072, 1.027], "bill_week": [1237, 1235, 1218, 1226]}, {"id": 1769, "name": "BHX_HCM_BTA - 869 Hương Lộ 2", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 2.216, "rev_prev": 2.05, "target": 2.153, "growth": 8.08, "bill": 8357, "gia_tri_bill": 128299, "fresh_sl": 29244.8, "canh_bao_goc": "Về đích", "rev_week": [0.48, 0.479, 0.512, 0.477], "bill_week": [545, 543, 561, 558]}, {"id": 6272, "name": "BHX_HCM_BTA - 87 Tây Lân", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 3.155, "rev_prev": 2.94, "target": 3.087, "growth": 7.31, "bill": 14230, "gia_tri_bill": 107275, "fresh_sl": 33436.6, "canh_bao_goc": "Về đích", "rev_week": [0.657, 0.652, 0.671, 0.743], "bill_week": [928, 922, 906, 971]}, {"id": 29915, "name": "BHX_HCM_BTA - 9 Liên Khu 5-6", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "New2026", "rev": 0.539, "rev_prev": 0.545, "target": 0.572, "growth": -1.02, "bill": 2584, "gia_tri_bill": 100931, "fresh_sl": 5077.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.113, 0.111, 0.13, 0.115], "bill_week": [171, 166, 181, 165]}, {"id": 5458, "name": "BHX_HCM_BTA - 90 Bùi Dương Lịch", "qltp_code": "43052", "qltp_name": "Thanh Nga", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 2.312, "rev_prev": 2.1, "target": 2.205, "growth": 10.1, "bill": 9859, "gia_tri_bill": 113461, "fresh_sl": 19667.0, "canh_bao_goc": "Về đích", "rev_week": [0.483, 0.45, 0.522, 0.517], "bill_week": [650, 609, 650, 670]}, {"id": 1837, "name": "BHX_HCM_BTA - 964 Hương Lộ 2", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.775, "rev_prev": 1.802, "target": 1.892, "growth": -1.5, "bill": 8056, "gia_tri_bill": 106629, "fresh_sl": 25101.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.402, 0.388, 0.383, 0.408], "bill_week": [568, 546, 522, 539]}, {"id": 2012, "name": "BHX_HCM_BTA - 97 Khiếu Năng Tĩnh", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "cho", "quan": "BTA", "moi_cu": "OLD", "rev": 1.571, "rev_prev": 1.628, "target": 1.709, "growth": -3.48, "bill": 7168, "gia_tri_bill": 106051, "fresh_sl": 19421.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.366, 0.367, 0.351, 0.365], "bill_week": [500, 444, 467, 497]}, {"id": 14419, "name": "BHX_HCM_BTA - The Privia Khang Điền", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 0.987, "rev_prev": 0.987, "target": 1.036, "growth": 0.02, "bill": 4976, "gia_tri_bill": 95997, "fresh_sl": 15505.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.216, 0.227, 0.22, 0.218], "bill_week": [332, 332, 328, 329]}, {"id": 15655, "name": "BHX_HCM_BTD - 165 Lê Văn Quới", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.526, "rev_prev": 1.41, "target": 1.48, "growth": 8.24, "bill": 6319, "gia_tri_bill": 116864, "fresh_sl": 20389.8, "canh_bao_goc": "Về đích", "rev_week": [0.323, 0.326, 0.347, 0.329], "bill_week": [418, 420, 415, 418]}, {"id": 30206, "name": "BHX_HCM_BTD - 260 Lê Văn Quới", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "New2026", "rev": 1.803, "rev_prev": 1.757, "target": 1.845, "growth": 2.59, "bill": 6943, "gia_tri_bill": 125648, "fresh_sl": 21915.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.397, 0.405, 0.413, 0.405], "bill_week": [472, 458, 452, 474]}, {"id": 28833, "name": "BHX_HCM_BTD - 285 Chiến Lược", "qltp_code": "21445", "qltp_name": "Tấn Phát", "vitri_key": "cho", "quan": "BTA", "moi_cu": "New2026", "rev": 1.115, "rev_prev": 0.99, "target": 1.039, "growth": 12.69, "bill": 5234, "gia_tri_bill": 103103, "fresh_sl": 14391.6, "canh_bao_goc": "Về đích", "rev_week": [0.222, 0.23, 0.244, 0.261], "bill_week": [325, 326, 341, 363]}, {"id": 29886, "name": "BHX_HCM_BTD - 34 Mã Lò", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "New2026", "rev": 0.639, "rev_prev": 0.641, "target": 0.673, "growth": -0.39, "bill": 3481, "gia_tri_bill": 88799, "fresh_sl": 9422.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.144, 0.137, 0.147, 0.141], "bill_week": [235, 231, 239, 227]}, {"id": 29801, "name": "BHX_HCM_BTD - 477 Bình Trị  Đông", "qltp_code": "48431", "qltp_name": "Tấn Đạt", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "New2026", "rev": 0.827, "rev_prev": 0.76, "target": 0.798, "growth": 8.9, "bill": 3917, "gia_tri_bill": 102205, "fresh_sl": 11388.2, "canh_bao_goc": "Về đích", "rev_week": [0.175, 0.169, 0.189, 0.191], "bill_week": [260, 248, 263, 262]}, {"id": 6155, "name": "BHX_HCM_BTH - 109 Bình Quới", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "kingfood", "quan": "BTH", "moi_cu": "OLD", "rev": 2.532, "rev_prev": 2.384, "target": 2.503, "growth": 6.2, "bill": 10782, "gia_tri_bill": 113616, "fresh_sl": 32095.7, "canh_bao_goc": "Về đích", "rev_week": [0.533, 0.526, 0.574, 0.561], "bill_week": [707, 705, 709, 721]}, {"id": 5455, "name": "BHX_HCM_BTH - 125/7 Bùi Đình Túy", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 3.162, "rev_prev": 3.075, "target": 3.228, "growth": 2.85, "bill": 14235, "gia_tri_bill": 107493, "fresh_sl": 49082.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.707, 0.682, 0.689, 0.721], "bill_week": [925, 940, 932, 951]}, {"id": 3771, "name": "BHX_HCM_BTH - 134 Đường D1", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 3.487, "rev_prev": 3.479, "target": 3.653, "growth": 0.23, "bill": 14711, "gia_tri_bill": 114701, "fresh_sl": 53154.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.752, 0.784, 0.776, 0.78], "bill_week": [993, 1005, 975, 991]}, {"id": 6420, "name": "BHX_HCM_BTH - 138 Nguyễn Xí", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 3.244, "rev_prev": 3.057, "target": 3.21, "growth": 6.1, "bill": 12173, "gia_tri_bill": 128943, "fresh_sl": 46414.1, "canh_bao_goc": "Về đích", "rev_week": [0.679, 0.676, 0.762, 0.711], "bill_week": [759, 780, 802, 828]}, {"id": 5073, "name": "BHX_HCM_BTH - 173 Bùi Đình Túy", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 2.077, "rev_prev": 2.045, "target": 2.147, "growth": 1.56, "bill": 9708, "gia_tri_bill": 103509, "fresh_sl": 32926.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.467, 0.462, 0.46, 0.467], "bill_week": [645, 638, 644, 642]}, {"id": 31279, "name": "BHX_HCM_BTH - 190B Phan Văn Trị", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 0.665, "rev_prev": 0.673, "target": 0.706, "growth": -1.16, "bill": 3469, "gia_tri_bill": 92722, "fresh_sl": 8561.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.156, 0.156, 0.147, 0.154], "bill_week": [234, 234, 228, 236]}, {"id": 29884, "name": "BHX_HCM_BTH - 219E-219F Nơ Trang Long", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 0.936, "rev_prev": 0.911, "target": 0.957, "growth": 2.73, "bill": 4384, "gia_tri_bill": 103344, "fresh_sl": 13948.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.204, 0.209, 0.206, 0.208], "bill_week": [283, 277, 280, 307]}, {"id": 5388, "name": "BHX_HCM_BTH - 234 Hoàng Hoa Thám", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 4.31, "rev_prev": 4.34, "target": 4.557, "growth": -0.69, "bill": 17606, "gia_tri_bill": 118446, "fresh_sl": 68935.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.947, 0.944, 0.953, 0.961], "bill_week": [1132, 1147, 1143, 1190]}, {"id": 3098, "name": "BHX_HCM_BTH - 265B Nguyễn Văn Đậu", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 2.275, "rev_prev": 2.11, "target": 2.215, "growth": 7.8, "bill": 8972, "gia_tri_bill": 122676, "fresh_sl": 29897.1, "canh_bao_goc": "Về đích", "rev_week": [0.471, 0.472, 0.503, 0.517], "bill_week": [607, 574, 589, 610]}, {"id": 8863, "name": "BHX_HCM_BTH - 27C Võ Duy Ninh", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "kingfood", "quan": "BTH", "moi_cu": "OLD", "rev": 3.617, "rev_prev": 3.41, "target": 3.581, "growth": 6.07, "bill": 14361, "gia_tri_bill": 121872, "fresh_sl": 55591.7, "canh_bao_goc": "Về đích", "rev_week": [0.786, 0.78, 0.815, 0.806], "bill_week": [946, 945, 950, 957]}, {"id": 14396, "name": "BHX_HCM_BTH - 352 Chu Văn An", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 1.928, "rev_prev": 1.817, "target": 1.908, "growth": 6.1, "bill": 9384, "gia_tri_bill": 99408, "fresh_sl": 24570.6, "canh_bao_goc": "Về đích", "rev_week": [0.403, 0.421, 0.445, 0.412], "bill_week": [611, 621, 640, 602]}, {"id": 4407, "name": "BHX_HCM_BTH - 371 Bình Quới", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 2.408, "rev_prev": 2.381, "target": 2.5, "growth": 1.15, "bill": 10704, "gia_tri_bill": 108848, "fresh_sl": 32013.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.532, 0.53, 0.533, 0.536], "bill_week": [716, 703, 708, 712]}, {"id": 14112, "name": "BHX_HCM_BTH - 41 Nguyễn Văn Lạc", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 1.706, "rev_prev": 1.637, "target": 1.719, "growth": 4.19, "bill": 7155, "gia_tri_bill": 115338, "fresh_sl": 26934.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.381, 0.352, 0.402, 0.366], "bill_week": [504, 479, 473, 473]}, {"id": 14736, "name": "BHX_HCM_BTH - 46A Ung Văn Khiêm", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 1.894, "rev_prev": 1.836, "target": 1.928, "growth": 3.16, "bill": 9110, "gia_tri_bill": 100597, "fresh_sl": 34418.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.4, 0.414, 0.422, 0.427], "bill_week": [587, 604, 600, 620]}, {"id": 14477, "name": "BHX_HCM_BTH - 553A Xô Viết Nghệ Tĩnh", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 2.494, "rev_prev": 2.352, "target": 2.469, "growth": 6.05, "bill": 10839, "gia_tri_bill": 111343, "fresh_sl": 40950.8, "canh_bao_goc": "Về đích", "rev_week": [0.538, 0.538, 0.551, 0.564], "bill_week": [706, 707, 716, 726]}, {"id": 14650, "name": "BHX_HCM_BTH - 58 Lê Văn Duyệt", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 1.434, "rev_prev": 1.26, "target": 1.323, "growth": 13.8, "bill": 5729, "gia_tri_bill": 121099, "fresh_sl": 19714.4, "canh_bao_goc": "Về đích", "rev_week": [0.283, 0.309, 0.321, 0.329], "bill_week": [371, 385, 377, 393]}, {"id": 3836, "name": "BHX_HCM_BTH - 63A Phan Văn Trị", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 2.75, "rev_prev": 2.531, "target": 2.657, "growth": 8.68, "bill": 10320, "gia_tri_bill": 128956, "fresh_sl": 35362.5, "canh_bao_goc": "Về đích", "rev_week": [0.567, 0.586, 0.628, 0.608], "bill_week": [672, 661, 666, 710]}, {"id": 4745, "name": "BHX_HCM_BTH - 8 Bình Lợi", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 3.81, "rev_prev": 3.667, "target": 3.85, "growth": 3.91, "bill": 16642, "gia_tri_bill": 110781, "fresh_sl": 53894.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.794, 0.819, 0.825, 0.887], "bill_week": [1083, 1086, 1064, 1152]}, {"id": 3251, "name": "BHX_HCM_BTH - 860/42 Xô Viết Nghệ Tĩnh", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 1.395, "rev_prev": 1.348, "target": 1.416, "growth": 3.45, "bill": 7201, "gia_tri_bill": 93739, "fresh_sl": 20903.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.303, 0.309, 0.313, 0.306], "bill_week": [463, 462, 484, 474]}, {"id": 14275, "name": "BHX_HCM_BTH - 96 Đặng Thuỳ Trâm", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "OLD", "rev": 1.464, "rev_prev": 1.556, "target": 1.634, "growth": -5.89, "bill": 6764, "gia_tri_bill": 104742, "fresh_sl": 24602.8, "canh_bao_goc": "Cần push", "rev_week": [0.345, 0.34, 0.315, 0.332], "bill_week": [488, 463, 447, 451]}, {"id": 31497, "name": "BHX_HCM_BTR - 537/10 Nguyễn Duy Trinh", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 0.628, "rev_prev": 0.0, "target": 0.0, "growth": null, "bill": 2892, "gia_tri_bill": 105153, "fresh_sl": 8054.9, "canh_bao_goc": "Không có kỳ trước", "rev_week": [null, 0.047, 0.14, 0.138], "bill_week": [null, 60, 191, 189]}, {"id": 30005, "name": "BHX_HCM_CLA - 132 Đường số 35-CL", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 1.976, "rev_prev": 1.927, "target": 2.023, "growth": 2.52, "bill": 9261, "gia_tri_bill": 103220, "fresh_sl": 30836.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.451, 0.428, 0.423, 0.452], "bill_week": [609, 599, 589, 636]}, {"id": 29939, "name": "BHX_HCM_CLA - 186 Lê Văn Thịnh", "qltp_code": "122824", "qltp_name": "Ngọc Anh", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "New2026", "rev": 1.0, "rev_prev": 0.926, "target": 0.972, "growth": 7.95, "bill": 4412, "gia_tri_bill": 109634, "fresh_sl": 13136.9, "canh_bao_goc": "Về đích", "rev_week": [0.203, 0.219, 0.221, 0.223], "bill_week": [276, 284, 290, 302]}, {"id": 34643, "name": "BHX_HCM_CLA - 31 Tạ Hiện", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 0.261, "rev_prev": 0.0, "target": 0.0, "growth": null, "bill": 1008, "gia_tri_bill": 125515, "fresh_sl": 4043.6, "canh_bao_goc": "Không có kỳ trước", "rev_week": [null, null, 0.0, 0.147], "bill_week": [null, null, 0, 168]}, {"id": 30151, "name": "BHX_HCM_GDI - 72-74 Vạn Kiếp", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 1.081, "rev_prev": 1.046, "target": 1.098, "growth": 3.32, "bill": 5002, "gia_tri_bill": 104543, "fresh_sl": 15294.1, "canh_bao_goc": "Theo dõi", "rev_week": [0.226, 0.243, 0.244, 0.241], "bill_week": [319, 320, 330, 330]}, {"id": 30070, "name": "BHX_HCM_GDI - 75 Điện Biên Phủ", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 2.184, "rev_prev": 2.095, "target": 2.2, "growth": 4.25, "bill": 9892, "gia_tri_bill": 106850, "fresh_sl": 36864.1, "canh_bao_goc": "Theo dõi", "rev_week": [0.473, 0.467, 0.458, 0.54], "bill_week": [643, 631, 646, 687]}, {"id": 28834, "name": "BHX_HCM_HBI - 12 đường 27", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 0.735, "rev_prev": 0.661, "target": 0.695, "growth": 11.19, "bill": 3553, "gia_tri_bill": 100159, "fresh_sl": 10574.2, "canh_bao_goc": "Về đích", "rev_week": [0.145, 0.151, 0.163, 0.172], "bill_week": [228, 229, 240, 242]}, {"id": 31465, "name": "BHX_HCM_HBI - 14C Đường số 30", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "New2026", "rev": 1.213, "rev_prev": 0.767, "target": 0.806, "growth": 58.08, "bill": 5317, "gia_tri_bill": 110407, "fresh_sl": 19192.5, "canh_bao_goc": "Mới mở / bất thường", "rev_week": [0.266, 0.256, 0.267, 0.269], "bill_week": [342, 340, 346, 357]}, {"id": 31307, "name": "BHX_HCM_HBI - 19B1 Đường 49", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 0.789, "rev_prev": 0.629, "target": 0.66, "growth": 25.38, "bill": 3835, "gia_tri_bill": 99503, "fresh_sl": 9849.1, "canh_bao_goc": "Về đích", "rev_week": [0.217, 0.178, 0.183, 0.169], "bill_week": [298, 253, 256, 253]}, {"id": 28577, "name": "BHX_HCM_HBI - 8A  Quốc Lộ 13 cũ", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "maxidi", "quan": "TDU", "moi_cu": "OLD", "rev": 1.813, "rev_prev": 1.688, "target": 1.772, "growth": 7.46, "bill": 6904, "gia_tri_bill": 127100, "fresh_sl": 20545.7, "canh_bao_goc": "Về đích", "rev_week": [0.371, 0.373, 0.42, 0.4], "bill_week": [463, 441, 462, 456]}, {"id": 29922, "name": "BHX_HCM_LBI -  524/1 Lê Văn Việt", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 2.8, "rev_prev": 2.609, "target": 2.74, "growth": 7.31, "bill": 9951, "gia_tri_bill": 136163, "fresh_sl": 0.0, "canh_bao_goc": "Về đích", "rev_week": [0.577, 0.61, 0.606, 0.65], "bill_week": [661, 668, 654, 669]}, {"id": 30157, "name": "BHX_HCM_LBI - Bs11. S13-14 Vinhomes Grand Park", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 1.264, "rev_prev": 1.193, "target": 1.253, "growth": 5.91, "bill": 5737, "gia_tri_bill": 106585, "fresh_sl": 22191.3, "canh_bao_goc": "Về đích", "rev_week": [0.272, 0.272, 0.286, 0.28], "bill_week": [377, 371, 382, 376]}, {"id": 28096, "name": "BHX_HCM_LBI - Bs7.S03-04 Vinhomes Grand Park", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.131, "rev_prev": 2.233, "target": 2.345, "growth": -4.57, "bill": 9899, "gia_tri_bill": 104174, "fresh_sl": 40025.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.479, 0.462, 0.474, 0.483], "bill_week": [670, 626, 658, 666]}, {"id": 31169, "name": "BHX_HCM_LBI - GH3.S02-03 Vinhomes Grand Park", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 1.655, "rev_prev": 1.183, "target": 1.242, "growth": 39.93, "bill": 6853, "gia_tri_bill": 116846, "fresh_sl": 26004.1, "canh_bao_goc": "Về đích", "rev_week": [0.35, 0.353, 0.376, 0.373], "bill_week": [415, 422, 441, 476]}, {"id": 13714, "name": "BHX_HCM_LBI - S10.02 Vinhomes Grand Park", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.287, "rev_prev": 2.311, "target": 2.426, "growth": -1.04, "bill": 10261, "gia_tri_bill": 107838, "fresh_sl": 39456.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.516, 0.495, 0.507, 0.524], "bill_week": [707, 674, 688, 686]}, {"id": 28772, "name": "BHX_HCM_LBI - S2.02.11 Vinhomes Grand Park", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 1.331, "rev_prev": 1.309, "target": 1.374, "growth": 1.69, "bill": 7588, "gia_tri_bill": 84873, "fresh_sl": 28681.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.298, 0.297, 0.299, 0.288], "bill_week": [503, 506, 511, 486]}, {"id": 31370, "name": "BHX_HCM_LBI - S3.01 - S12 Vinhomes Grand Park", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 0.316, "rev_prev": 0.0, "target": 0.0, "growth": null, "bill": 1513, "gia_tri_bill": 101012, "fresh_sl": 6116.4, "canh_bao_goc": "Không có kỳ trước", "rev_week": [null, null, 0.036, 0.137], "bill_week": [null, null, 37, 209]}, {"id": 31371, "name": "BHX_HCM_LBI - S3.05 - S16 Vinhomes Grand Park", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 0.822, "rev_prev": 0.234, "target": 0.245, "growth": 251.82, "bill": 4607, "gia_tri_bill": 86347, "fresh_sl": 17160.8, "canh_bao_goc": "Mới mở / bất thường", "rev_week": [0.095, 0.201, 0.181, 0.18], "bill_week": [116, 316, 303, 302]}, {"id": 29941, "name": "BHX_HCM_LTR - 158B Nguyễn Duy Trinh", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 1.358, "rev_prev": 1.342, "target": 1.409, "growth": 1.22, "bill": 5760, "gia_tri_bill": 114077, "fresh_sl": 20676.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.298, 0.284, 0.297, 0.312], "bill_week": [378, 374, 374, 397]}, {"id": 27961, "name": "BHX_HCM_LXU - 729-731 Kha Vạn Cân", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 0.988, "rev_prev": 0.956, "target": 1.003, "growth": 3.42, "bill": 4803, "gia_tri_bill": 99561, "fresh_sl": 13733.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.211, 0.222, 0.222, 0.225], "bill_week": [319, 317, 318, 328]}, {"id": 4817, "name": "BHX_HCM_TDU - 01 Bưng Ông Thoàn", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 3.253, "rev_prev": 3.044, "target": 3.197, "growth": 6.87, "bill": 10860, "gia_tri_bill": 144959, "fresh_sl": 42931.9, "canh_bao_goc": "Về đích", "rev_week": [0.692, 0.709, 0.719, 0.735], "bill_week": [705, 695, 718, 728]}, {"id": 3773, "name": "BHX_HCM_TDU - 07 Ngô Quyền", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 2.433, "rev_prev": 2.327, "target": 2.443, "growth": 4.59, "bill": 10952, "gia_tri_bill": 107501, "fresh_sl": 40203.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.524, 0.537, 0.535, 0.547], "bill_week": [705, 711, 710, 739]}, {"id": 5074, "name": "BHX_HCM_TDU - 102A Đường Số 9", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 3.311, "rev_prev": 3.016, "target": 3.166, "growth": 9.79, "bill": 13772, "gia_tri_bill": 116327, "fresh_sl": 42666.3, "canh_bao_goc": "Về đích", "rev_week": [0.687, 0.703, 0.719, 0.757], "bill_week": [895, 864, 900, 930]}, {"id": 3002, "name": "BHX_HCM_TDU - 1030 Tỉnh Lộ 43", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.894, "rev_prev": 2.726, "target": 2.863, "growth": 6.16, "bill": 11038, "gia_tri_bill": 126878, "fresh_sl": 24841.5, "canh_bao_goc": "Về đích", "rev_week": [0.617, 0.587, 0.635, 0.667], "bill_week": [695, 692, 711, 755]}, {"id": 3261, "name": "BHX_HCM_TDU - 11 Tô Vĩnh Diện", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.055, "rev_prev": 1.761, "target": 1.849, "growth": 16.71, "bill": 8579, "gia_tri_bill": 115893, "fresh_sl": 26494.5, "canh_bao_goc": "Về đích", "rev_week": [0.4, 0.435, 0.486, 0.385], "bill_week": [563, 555, 564, 585]}, {"id": 3589, "name": "BHX_HCM_TDU - 1267 Tỉnh Lộ 43", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.238, "rev_prev": 1.183, "target": 1.242, "growth": 4.65, "bill": 5315, "gia_tri_bill": 112703, "fresh_sl": 12376.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.267, 0.257, 0.26, 0.289], "bill_week": [353, 334, 336, 364]}, {"id": 6020, "name": "BHX_HCM_TDU - 1385/1 Nguyễn Duy Trinh", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 2.809, "rev_prev": 2.751, "target": 2.889, "growth": 2.1, "bill": 9670, "gia_tri_bill": 140544, "fresh_sl": 35581.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.628, 0.62, 0.634, 0.607], "bill_week": [645, 648, 641, 626]}, {"id": 8284, "name": "BHX_HCM_TDU - 141 Đỗ Xuân Hợp", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.833, "rev_prev": 2.627, "target": 2.759, "growth": 7.84, "bill": 9460, "gia_tri_bill": 144916, "fresh_sl": 37498.7, "canh_bao_goc": "Về đích", "rev_week": [0.596, 0.611, 0.605, 0.667], "bill_week": [613, 607, 613, 656]}, {"id": 5454, "name": "BHX_HCM_TDU - 143 Linh Đông", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.463, "rev_prev": 2.537, "target": 2.664, "growth": -2.91, "bill": 9605, "gia_tri_bill": 124073, "fresh_sl": 29040.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.532, 0.505, 0.554, 0.559], "bill_week": [641, 597, 635, 653]}, {"id": 3827, "name": "BHX_HCM_TDU - 153 Tân Lập 2", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.892, "rev_prev": 1.753, "target": 1.841, "growth": 7.91, "bill": 8772, "gia_tri_bill": 104339, "fresh_sl": 28585.8, "canh_bao_goc": "Về đích", "rev_week": [0.401, 0.398, 0.433, 0.409], "bill_week": [590, 562, 590, 579]}, {"id": 14720, "name": "BHX_HCM_TDU - 153-155-157 Đại Lộ 3", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.181, "rev_prev": 0.985, "target": 1.034, "growth": 19.97, "bill": 6378, "gia_tri_bill": 89614, "fresh_sl": 14277.1, "canh_bao_goc": "Về đích", "rev_week": [0.21, 0.247, 0.256, 0.282], "bill_week": [328, 374, 410, 460]}, {"id": 9933, "name": "BHX_HCM_TDU - 15A Đường Số 7", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.571, "rev_prev": 2.614, "target": 2.745, "growth": -1.66, "bill": 10033, "gia_tri_bill": 123984, "fresh_sl": 26346.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.665, 0.548, 0.542, 0.579], "bill_week": [718, 671, 650, 660]}, {"id": 14517, "name": "BHX_HCM_TDU - 167 Đường Số 11", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 0.699, "rev_prev": 0.68, "target": 0.714, "growth": 2.85, "bill": 3580, "gia_tri_bill": 94543, "fresh_sl": 7697.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.149, 0.15, 0.155, 0.157], "bill_week": [226, 231, 232, 242]}, {"id": 9964, "name": "BHX_HCM_TDU - 169 Đường 154", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 4.613, "rev_prev": 4.201, "target": 4.412, "growth": 9.79, "bill": 15465, "gia_tri_bill": 144321, "fresh_sl": 52325.5, "canh_bao_goc": "Về đích", "rev_week": [0.979, 0.954, 0.963, 1.108], "bill_week": [1055, 1001, 1012, 1035]}, {"id": 6581, "name": "BHX_HCM_TDU - 16A Thái Thuận (Cao Ốc An Thịnh)", "qltp_code": "84687", "qltp_name": "Thành Sự", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 1.007, "rev_prev": 0.989, "target": 1.039, "growth": 1.79, "bill": 4978, "gia_tri_bill": 97862, "fresh_sl": 12548.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.226, 0.213, 0.219, 0.238], "bill_week": [340, 321, 330, 340]}, {"id": 3750, "name": "BHX_HCM_TDU - 182 Đỗ Xuân Hợp", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.556, "rev_prev": 1.473, "target": 1.546, "growth": 5.67, "bill": 7513, "gia_tri_bill": 100232, "fresh_sl": 27090.8, "canh_bao_goc": "Về đích", "rev_week": [0.325, 0.333, 0.339, 0.356], "bill_week": [476, 484, 482, 518]}, {"id": 14666, "name": "BHX_HCM_TDU - 192 Man Thiện", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 1.331, "rev_prev": 1.307, "target": 1.373, "growth": 1.82, "bill": 6198, "gia_tri_bill": 103919, "fresh_sl": 19196.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.281, 0.29, 0.294, 0.301], "bill_week": [403, 401, 403, 420]}, {"id": 4244, "name": "BHX_HCM_TDU - 197A Dương Đình Hội", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.699, "rev_prev": 1.745, "target": 1.832, "growth": -2.62, "bill": 7335, "gia_tri_bill": 112105, "fresh_sl": 22057.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.39, 0.368, 0.352, 0.408], "bill_week": [479, 470, 468, 504]}, {"id": 5095, "name": "BHX_HCM_TDU - 1D Đường 18 (Phước Bình)", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.911, "rev_prev": 1.805, "target": 1.895, "growth": 5.86, "bill": 9077, "gia_tri_bill": 101868, "fresh_sl": 27983.2, "canh_bao_goc": "Về đích", "rev_week": [0.405, 0.411, 0.421, 0.434], "bill_week": [572, 575, 592, 621]}, {"id": 6184, "name": "BHX_HCM_TDU - 2/1 Lã Xuân Oai", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "maxidi", "quan": "TDU", "moi_cu": "OLD", "rev": 2.802, "rev_prev": 2.777, "target": 2.915, "growth": 0.93, "bill": 11387, "gia_tri_bill": 119085, "fresh_sl": 37650.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.614, 0.613, 0.619, 0.623], "bill_week": [776, 753, 758, 742]}, {"id": 8865, "name": "BHX_HCM_TDU - 2/14 Đường số 20", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 3.908, "rev_prev": 3.74, "target": 3.927, "growth": 4.47, "bill": 15407, "gia_tri_bill": 122722, "fresh_sl": 54192.1, "canh_bao_goc": "Theo dõi", "rev_week": [0.828, 0.845, 0.855, 0.879], "bill_week": [994, 1020, 1002, 1032]}, {"id": 28670, "name": "BHX_HCM_TDU - 20 đường số 3", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 1.428, "rev_prev": 1.328, "target": 1.394, "growth": 7.51, "bill": 6147, "gia_tri_bill": 112384, "fresh_sl": 23923.4, "canh_bao_goc": "Về đích", "rev_week": [0.302, 0.312, 0.319, 0.314], "bill_week": [399, 397, 400, 419]}, {"id": 3386, "name": "BHX_HCM_TDU - 205 Lã Xuân Oai", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.923, "rev_prev": 2.838, "target": 2.98, "growth": 2.97, "bill": 12533, "gia_tri_bill": 112838, "fresh_sl": 43598.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.633, 0.647, 0.649, 0.65], "bill_week": [850, 840, 834, 820]}, {"id": 16861, "name": "BHX_HCM_TDU - 206 Tam Bình", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.782, "rev_prev": 1.568, "target": 1.647, "growth": 13.66, "bill": 7636, "gia_tri_bill": 112937, "fresh_sl": 21608.6, "canh_bao_goc": "Về đích", "rev_week": [0.35, 0.358, 0.395, 0.414], "bill_week": [482, 479, 509, 516]}, {"id": 3248, "name": "BHX_HCM_TDU - 22 Đường 339", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.035, "rev_prev": 1.824, "target": 1.915, "growth": 11.57, "bill": 9441, "gia_tri_bill": 104274, "fresh_sl": 30510.6, "canh_bao_goc": "Về đích", "rev_week": [0.407, 0.42, 0.447, 0.468], "bill_week": [606, 604, 620, 642]}, {"id": 6278, "name": "BHX_HCM_TDU - 223 Long Phước", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.624, "rev_prev": 2.558, "target": 2.686, "growth": 2.59, "bill": 9739, "gia_tri_bill": 130361, "fresh_sl": 29033.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.579, 0.576, 0.555, 0.6], "bill_week": [633, 628, 627, 661]}, {"id": 14762, "name": "BHX_HCM_TDU - 224 Tô Ngọc Vân", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 0.665, "rev_prev": 0.65, "target": 0.682, "growth": 2.37, "bill": 3402, "gia_tri_bill": 94611, "fresh_sl": 6471.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.141, 0.135, 0.143, 0.153], "bill_week": [220, 213, 224, 228]}, {"id": 6582, "name": "BHX_HCM_TDU - 227 Đình Phong Phú", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.798, "rev_prev": 1.867, "target": 1.961, "growth": -3.71, "bill": 7965, "gia_tri_bill": 109222, "fresh_sl": 22031.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.437, 0.397, 0.406, 0.396], "bill_week": [532, 540, 528, 536]}, {"id": 3692, "name": "BHX_HCM_TDU - 23 Đường Số 3 Hiệp Bình Chánh", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.721, "rev_prev": 2.609, "target": 2.739, "growth": 4.31, "bill": 11417, "gia_tri_bill": 115317, "fresh_sl": 36101.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.588, 0.583, 0.592, 0.616], "bill_week": [757, 741, 766, 741]}, {"id": 6402, "name": "BHX_HCM_TDU - 23 Đường Số 6 (Chợ Đại Đoàn Kết)", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 1.951, "rev_prev": 1.84, "target": 1.932, "growth": 6.03, "bill": 9530, "gia_tri_bill": 99066, "fresh_sl": 19811.4, "canh_bao_goc": "Về đích", "rev_week": [0.406, 0.411, 0.441, 0.435], "bill_week": [596, 600, 634, 634]}, {"id": 7029, "name": "BHX_HCM_TDU - 3 Lý Tế Xuyên", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.278, "rev_prev": 2.178, "target": 2.287, "growth": 4.59, "bill": 9589, "gia_tri_bill": 114969, "fresh_sl": 24056.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.497, 0.468, 0.506, 0.505], "bill_week": [632, 585, 625, 645]}, {"id": 5776, "name": "BHX_HCM_TDU - 30 Đường Số 3", "qltp_code": "84687", "qltp_name": "Thành Sự", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 4.374, "rev_prev": 4.272, "target": 4.486, "growth": 2.4, "bill": 17659, "gia_tri_bill": 119864, "fresh_sl": 75934.1, "canh_bao_goc": "Theo dõi", "rev_week": [0.951, 0.903, 0.98, 0.983], "bill_week": [1166, 1110, 1169, 1190]}, {"id": 14135, "name": "BHX_HCM_TDU - 314 Võ Văn Hát", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.194, "rev_prev": 2.221, "target": 2.332, "growth": -1.19, "bill": 9858, "gia_tri_bill": 107701, "fresh_sl": 26685.4, "canh_bao_goc": "Theo dõi", "rev_week": [0.492, 0.473, 0.503, 0.484], "bill_week": [696, 672, 687, 613]}, {"id": 3391, "name": "BHX_HCM_TDU - 323 Lê Văn Thịnh", "qltp_code": "122824", "qltp_name": "Ngọc Anh", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 3.351, "rev_prev": 3.207, "target": 3.367, "growth": 4.49, "bill": 12525, "gia_tri_bill": 129457, "fresh_sl": 41477.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.698, 0.73, 0.738, 0.762], "bill_week": [806, 824, 807, 856]}, {"id": 7031, "name": "BHX_HCM_TDU - 34 Đường Số 4D", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.237, "rev_prev": 2.126, "target": 2.232, "growth": 5.25, "bill": 10168, "gia_tri_bill": 106475, "fresh_sl": 23405.6, "canh_bao_goc": "Về đích", "rev_week": [0.489, 0.486, 0.477, 0.508], "bill_week": [677, 664, 669, 678]}, {"id": 9272, "name": "BHX_HCM_TDU - 342 Nguyễn Duy Trinh", "qltp_code": "84687", "qltp_name": "Thành Sự", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 2.561, "rev_prev": 2.465, "target": 2.589, "growth": 3.87, "bill": 9655, "gia_tri_bill": 128334, "fresh_sl": 36385.4, "canh_bao_goc": "Theo dõi", "rev_week": [0.57, 0.544, 0.562, 0.584], "bill_week": [635, 620, 624, 668]}, {"id": 3454, "name": "BHX_HCM_TDU - 388 Tỉnh Lộ 43", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 2.174, "rev_prev": 2.108, "target": 2.214, "growth": 3.13, "bill": 7946, "gia_tri_bill": 132403, "fresh_sl": 21390.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.452, 0.49, 0.481, 0.479], "bill_week": [532, 542, 535, 514]}, {"id": 15040, "name": "BHX_HCM_TDU - 38D Cây Keo", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 1.479, "rev_prev": 1.36, "target": 1.428, "growth": 8.76, "bill": 6528, "gia_tri_bill": 109661, "fresh_sl": 20832.3, "canh_bao_goc": "Về đích", "rev_week": [0.313, 0.305, 0.337, 0.319], "bill_week": [429, 418, 437, 424]}, {"id": 14815, "name": "BHX_HCM_TDU - 40 Dân Chủ", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 0.643, "rev_prev": 0.588, "target": 0.618, "growth": 9.31, "bill": 3527, "gia_tri_bill": 88216, "fresh_sl": 7946.1, "canh_bao_goc": "Về đích", "rev_week": [0.13, 0.124, 0.146, 0.146], "bill_week": [229, 218, 228, 244]}, {"id": 7687, "name": "BHX_HCM_TDU - 40A Đường 147", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "maxidi", "quan": "TDU", "moi_cu": "OLD", "rev": 3.372, "rev_prev": 3.207, "target": 3.367, "growth": 5.16, "bill": 15381, "gia_tri_bill": 106093, "fresh_sl": 55168.6, "canh_bao_goc": "Về đích", "rev_week": [0.722, 0.714, 0.735, 0.776], "bill_week": [1025, 977, 1004, 1050]}, {"id": 7277, "name": "BHX_HCM_TDU - 419 Kha Vạn Cân", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 3.889, "rev_prev": 3.981, "target": 4.18, "growth": -2.32, "bill": 13986, "gia_tri_bill": 134539, "fresh_sl": 47838.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.86, 0.839, 0.877, 0.859], "bill_week": [929, 904, 926, 936]}, {"id": 3437, "name": "BHX_HCM_TDU - 419 Nguyễn Thị Định", "qltp_code": "122824", "qltp_name": "Ngọc Anh", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 0.845, "rev_prev": 0.852, "target": 0.895, "growth": -0.85, "bill": 3676, "gia_tri_bill": 111185, "fresh_sl": 11253.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.177, 0.191, 0.203, 0.172], "bill_week": [246, 244, 258, 231]}, {"id": 3712, "name": "BHX_HCM_TDU - 42 Lê Văn Chí", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "maxidi", "quan": "TDU", "moi_cu": "OLD", "rev": 4.795, "rev_prev": 4.369, "target": 4.588, "growth": 9.75, "bill": 14805, "gia_tri_bill": 156725, "fresh_sl": 48114.3, "canh_bao_goc": "Về đích", "rev_week": [0.955, 1.001, 1.099, 1.046], "bill_week": [936, 951, 979, 997]}, {"id": 6747, "name": "BHX_HCM_TDU - 443 Kha Vạn Cân", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.726, "rev_prev": 1.661, "target": 1.744, "growth": 3.9, "bill": 7565, "gia_tri_bill": 110399, "fresh_sl": 25203.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.368, 0.366, 0.385, 0.386], "bill_week": [491, 493, 506, 500]}, {"id": 14390, "name": "BHX_HCM_TDU - 457 Quốc Lộ 13", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 3.878, "rev_prev": 3.8, "target": 3.99, "growth": 2.05, "bill": 13012, "gia_tri_bill": 144208, "fresh_sl": 53346.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.839, 0.805, 0.856, 0.902], "bill_week": [871, 830, 870, 876]}, {"id": 3254, "name": "BHX_HCM_TDU - 4A Đường Số 11", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 2.108, "rev_prev": 2.069, "target": 2.173, "growth": 1.88, "bill": 8757, "gia_tri_bill": 116484, "fresh_sl": 30254.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.458, 0.444, 0.488, 0.466], "bill_week": [584, 568, 582, 586]}, {"id": 3250, "name": "BHX_HCM_TDU - 51 Đường Số 2", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 3.594, "rev_prev": 3.386, "target": 3.555, "growth": 6.13, "bill": 14183, "gia_tri_bill": 122598, "fresh_sl": 48931.1, "canh_bao_goc": "Về đích", "rev_week": [0.756, 0.775, 0.792, 0.804], "bill_week": [913, 899, 933, 952]}, {"id": 3469, "name": "BHX_HCM_TDU - 53-53/4 Đường Số 8", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "maxidi", "quan": "TDU", "moi_cu": "OLD", "rev": 3.48, "rev_prev": 3.003, "target": 3.153, "growth": 15.87, "bill": 12371, "gia_tri_bill": 136107, "fresh_sl": 31328.5, "canh_bao_goc": "Về đích", "rev_week": [0.686, 0.686, 0.79, 0.752], "bill_week": [829, 796, 829, 813]}, {"id": 3890, "name": "BHX_HCM_TDU - 57 Nam Cao", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.789, "rev_prev": 1.684, "target": 1.768, "growth": 6.22, "bill": 8653, "gia_tri_bill": 100018, "fresh_sl": 24801.0, "canh_bao_goc": "Về đích", "rev_week": [0.377, 0.38, 0.383, 0.417], "bill_week": [544, 548, 563, 585]}, {"id": 7325, "name": "BHX_HCM_TDU - 581 Kha Vạn Cân", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.392, "rev_prev": 2.327, "target": 2.443, "growth": 2.81, "bill": 10630, "gia_tri_bill": 108886, "fresh_sl": 34359.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.511, 0.51, 0.534, 0.533], "bill_week": [710, 700, 699, 710]}, {"id": 14136, "name": "BHX_HCM_TDU - 59 đường số 1", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 1.775, "rev_prev": 1.728, "target": 1.815, "growth": 2.7, "bill": 7777, "gia_tri_bill": 110445, "fresh_sl": 28033.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.389, 0.385, 0.406, 0.397], "bill_week": [515, 492, 527, 516]}, {"id": 5803, "name": "BHX_HCM_TDU - 6 Lò Lu", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.242, "rev_prev": 2.156, "target": 2.263, "growth": 4.03, "bill": 9576, "gia_tri_bill": 113312, "fresh_sl": 30547.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.479, 0.477, 0.502, 0.498], "bill_week": [620, 604, 634, 647]}, {"id": 30044, "name": "BHX_HCM_TDU - 6-6A Chương Dương", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 1.169, "rev_prev": 1.069, "target": 1.122, "growth": 9.38, "bill": 4874, "gia_tri_bill": 116052, "fresh_sl": 11626.6, "canh_bao_goc": "Về đích", "rev_week": [0.246, 0.34, 0.267, 0.217], "bill_week": [335, 295, 312, 346]}, {"id": 4946, "name": "BHX_HCM_TDU - 60 Đường Số 39", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 2.776, "rev_prev": 2.685, "target": 2.82, "growth": 3.36, "bill": 11653, "gia_tri_bill": 115251, "fresh_sl": 32252.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.6, 0.62, 0.62, 0.621], "bill_week": [765, 774, 771, 774]}, {"id": 3668, "name": "BHX_HCM_TDU - 602 Nguyễn Duy Trinh", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 2.646, "rev_prev": 2.693, "target": 2.828, "growth": -1.75, "bill": 9924, "gia_tri_bill": 129002, "fresh_sl": 29381.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.617, 0.579, 0.589, 0.591], "bill_week": [665, 628, 644, 676]}, {"id": 4937, "name": "BHX_HCM_TDU - 61 Nguyễn Duy Trinh", "qltp_code": "84687", "qltp_name": "Thành Sự", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 1.227, "rev_prev": 1.23, "target": 1.292, "growth": -0.27, "bill": 6327, "gia_tri_bill": 93817, "fresh_sl": 18415.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.273, 0.287, 0.275, 0.274], "bill_week": [411, 412, 411, 431]}, {"id": 4834, "name": "BHX_HCM_TDU - 61/16 Đường Số 48", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "maxidi", "quan": "TDU", "moi_cu": "OLD", "rev": 1.511, "rev_prev": 1.53, "target": 1.607, "growth": -1.26, "bill": 7083, "gia_tri_bill": 103214, "fresh_sl": 24481.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.338, 0.314, 0.33, 0.349], "bill_week": [481, 444, 459, 485]}, {"id": 9295, "name": "BHX_HCM_TDU - 615 Tô Ngọc Vân", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.847, "rev_prev": 2.649, "target": 2.781, "growth": 7.5, "bill": 10333, "gia_tri_bill": 133340, "fresh_sl": 29792.0, "canh_bao_goc": "Về đích", "rev_week": [0.616, 0.592, 0.625, 0.65], "bill_week": [654, 657, 672, 704]}, {"id": 6188, "name": "BHX_HCM_TDU - 623H Đỗ Xuân Hợp", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 3.161, "rev_prev": 3.06, "target": 3.213, "growth": 3.29, "bill": 11226, "gia_tri_bill": 136235, "fresh_sl": 45354.1, "canh_bao_goc": "Theo dõi", "rev_week": [0.679, 0.684, 0.677, 0.751], "bill_week": [731, 733, 737, 770]}, {"id": 3853, "name": "BHX_HCM_TDU - 64 Đường số 7 Phước Bình", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 3.696, "rev_prev": 3.519, "target": 3.695, "growth": 5.01, "bill": 13860, "gia_tri_bill": 129022, "fresh_sl": 50353.3, "canh_bao_goc": "Về đích", "rev_week": [0.78, 0.82, 0.827, 0.813], "bill_week": [880, 888, 912, 932]}, {"id": 2911, "name": "BHX_HCM_TDU - 65/10 Đường Số 5 (Linh Xuân)", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 1.101, "rev_prev": 1.103, "target": 1.158, "growth": -0.15, "bill": 5568, "gia_tri_bill": 95678, "fresh_sl": 11166.4, "canh_bao_goc": "Theo dõi", "rev_week": [0.247, 0.245, 0.239, 0.251], "bill_week": [369, 354, 361, 376]}, {"id": 14748, "name": "BHX_HCM_TDU - 68A-68B đường Đình Phong Phú", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 0.807, "rev_prev": 0.688, "target": 0.722, "growth": 17.31, "bill": 4034, "gia_tri_bill": 96806, "fresh_sl": 10326.0, "canh_bao_goc": "Về đích", "rev_week": [0.168, 0.157, 0.18, 0.183], "bill_week": [269, 255, 260, 280]}, {"id": 3342, "name": "BHX_HCM_TDU - 70 Hiệp Bình", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 2.229, "rev_prev": 2.183, "target": 2.292, "growth": 2.11, "bill": 9523, "gia_tri_bill": 113275, "fresh_sl": 27561.5, "canh_bao_goc": "Theo dõi", "rev_week": [0.494, 0.489, 0.483, 0.501], "bill_week": [637, 628, 611, 646]}, {"id": 3970, "name": "BHX_HCM_TDU - 71 Hiệp Bình", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 2.267, "rev_prev": 2.195, "target": 2.305, "growth": 3.28, "bill": 9306, "gia_tri_bill": 117884, "fresh_sl": 28189.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.508, 0.491, 0.49, 0.516], "bill_week": [627, 606, 605, 620]}, {"id": 5007, "name": "BHX_HCM_TDU - 72 Quốc Hương", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 4.28, "rev_prev": 4.161, "target": 4.369, "growth": 2.85, "bill": 14917, "gia_tri_bill": 138834, "fresh_sl": 63569.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.935, 0.914, 0.939, 0.987], "bill_week": [1001, 945, 961, 1044]}, {"id": 4520, "name": "BHX_HCM_TDU - 75 Đường 23", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.43, "rev_prev": 1.36, "target": 1.428, "growth": 5.13, "bill": 7244, "gia_tri_bill": 95487, "fresh_sl": 19427.8, "canh_bao_goc": "Về đích", "rev_week": [0.297, 0.309, 0.319, 0.317], "bill_week": [451, 473, 482, 474]}, {"id": 9138, "name": "BHX_HCM_TDU - 80 Ngô Chí Quốc", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "maxidi", "quan": "TDU", "moi_cu": "OLD", "rev": 2.886, "rev_prev": 2.768, "target": 2.906, "growth": 4.26, "bill": 10075, "gia_tri_bill": 138589, "fresh_sl": 27555.7, "canh_bao_goc": "Theo dõi", "rev_week": [0.615, 0.618, 0.64, 0.648], "bill_week": [665, 638, 653, 687]}, {"id": 5979, "name": "BHX_HCM_TDU - 807 Nguyễn Xiển", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "maxidi", "quan": "TDU", "moi_cu": "OLD", "rev": 2.869, "rev_prev": 2.577, "target": 2.706, "growth": 11.31, "bill": 9129, "gia_tri_bill": 152068, "fresh_sl": 34134.5, "canh_bao_goc": "Về đích", "rev_week": [0.588, 0.583, 0.66, 0.643], "bill_week": [607, 573, 610, 610]}, {"id": 10109, "name": "BHX_HCM_TDU - 81A Đường 339", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 2.823, "rev_prev": 2.74, "target": 2.877, "growth": 3.02, "bill": 12428, "gia_tri_bill": 109892, "fresh_sl": 37753.6, "canh_bao_goc": "Theo dõi", "rev_week": [0.63, 0.624, 0.618, 0.648], "bill_week": [795, 794, 810, 850]}, {"id": 3588, "name": "BHX_HCM_TDU - 83 Đặng Văn Bi", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 3.034, "rev_prev": 3.038, "target": 3.19, "growth": -0.14, "bill": 12804, "gia_tri_bill": 114645, "fresh_sl": 43627.0, "canh_bao_goc": "Theo dõi", "rev_week": [0.676, 0.677, 0.663, 0.693], "bill_week": [857, 861, 847, 845]}, {"id": 13733, "name": "BHX_HCM_TDU - 83 đường số 3", "qltp_code": "84687", "qltp_name": "Thành Sự", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 1.107, "rev_prev": 0.961, "target": 1.009, "growth": 15.2, "bill": 5374, "gia_tri_bill": 99650, "fresh_sl": 15489.3, "canh_bao_goc": "Về đích", "rev_week": [0.218, 0.229, 0.255, 0.247], "bill_week": [348, 341, 360, 359]}, {"id": 4288, "name": "BHX_HCM_TDU - 87 Man Thiện", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 2.324, "rev_prev": 2.021, "target": 2.122, "growth": 14.97, "bill": 11143, "gia_tri_bill": 100898, "fresh_sl": 34972.9, "canh_bao_goc": "Về đích", "rev_week": [0.471, 0.476, 0.498, 0.535], "bill_week": [705, 695, 713, 778]}, {"id": 7688, "name": "BHX_HCM_TDU - 94 Linh Trung", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "maxidi", "quan": "TDU", "moi_cu": "OLD", "rev": 3.201, "rev_prev": 3.248, "target": 3.411, "growth": -1.45, "bill": 12226, "gia_tri_bill": 126686, "fresh_sl": 34079.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.775, 0.717, 0.733, 0.653], "bill_week": [828, 790, 787, 837]}, {"id": 3257, "name": "BHX_HCM_TDU - 99 Tăng Nhơn Phú", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 4.02, "rev_prev": 3.498, "target": 3.673, "growth": 14.92, "bill": 15868, "gia_tri_bill": 122580, "fresh_sl": 52564.6, "canh_bao_goc": "Về đích", "rev_week": [0.801, 0.861, 0.922, 0.835], "bill_week": [1027, 1006, 1031, 1089]}, {"id": 14570, "name": "BHX_HCM_TDU - 99A Nguyễn Duy Trinh", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.474, "rev_prev": 1.501, "target": 1.576, "growth": -1.84, "bill": 6562, "gia_tri_bill": 108659, "fresh_sl": 22121.9, "canh_bao_goc": "Theo dõi", "rev_week": [0.342, 0.326, 0.32, 0.337], "bill_week": [464, 443, 429, 446]}, {"id": 9458, "name": "BHX_HCM_TDU - An Phú", "qltp_code": "122824", "qltp_name": "Ngọc Anh", "vitri_key": "kingfood", "quan": "TDU", "moi_cu": "OLD", "rev": 2.083, "rev_prev": 2.09, "target": 2.195, "growth": -0.33, "bill": 7572, "gia_tri_bill": 133121, "fresh_sl": 37935.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.477, 0.466, 0.471, 0.478], "bill_week": [538, 515, 503, 516]}, {"id": 5453, "name": "BHX_HCM_TDU - D1/1 Đường 385", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.987, "rev_prev": 1.748, "target": 1.836, "growth": 13.64, "bill": 10544, "gia_tri_bill": 91167, "fresh_sl": 31527.7, "canh_bao_goc": "Về đích", "rev_week": [0.397, 0.412, 0.435, 0.446], "bill_week": [672, 677, 692, 703]}, {"id": 9294, "name": "BHX_HCM_TDU - Hiệp Phú", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.109, "rev_prev": 2.041, "target": 2.143, "growth": 3.33, "bill": 9586, "gia_tri_bill": 106452, "fresh_sl": 32824.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.45, 0.45, 0.474, 0.471], "bill_week": [634, 636, 642, 637]}, {"id": 10102, "name": "BHX_HCM_TDU - Long Bình", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.271, "rev_prev": 1.226, "target": 1.287, "growth": 3.71, "bill": 5408, "gia_tri_bill": 113742, "fresh_sl": 14428.4, "canh_bao_goc": "Theo dõi", "rev_week": [0.278, 0.28, 0.283, 0.279], "bill_week": [343, 350, 357, 348]}, {"id": 14463, "name": "BHX_HCM_TDU - S6.01 Vinhomes Grand Park", "qltp_code": "88365", "qltp_name": "Đình Thuận", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.404, "rev_prev": 1.436, "target": 1.508, "growth": -2.28, "bill": 6698, "gia_tri_bill": 101403, "fresh_sl": 26096.2, "canh_bao_goc": "Theo dõi", "rev_week": [0.326, 0.315, 0.313, 0.312], "bill_week": [450, 441, 453, 439]}, {"id": 13035, "name": "BHX_HCM_TDU - Sunview Town", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.532, "rev_prev": 1.508, "target": 1.584, "growth": 1.56, "bill": 8525, "gia_tri_bill": 86950, "fresh_sl": 24401.8, "canh_bao_goc": "Theo dõi", "rev_week": [0.334, 0.329, 0.35, 0.326], "bill_week": [551, 542, 547, 578]}, {"id": 4361, "name": "BHX_HCM_TDU - Số 3 Đường Số 6", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "cho", "quan": "TDU", "moi_cu": "OLD", "rev": 1.407, "rev_prev": 1.319, "target": 1.385, "growth": 6.68, "bill": 7074, "gia_tri_bill": 96243, "fresh_sl": 17953.3, "canh_bao_goc": "Về đích", "rev_week": [0.289, 0.304, 0.307, 0.324], "bill_week": [428, 453, 457, 478]}, {"id": 9271, "name": "BHX_HCM_TDU - Thạnh Mỹ Lợi", "qltp_code": "122824", "qltp_name": "Ngọc Anh", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 2.547, "rev_prev": 2.358, "target": 2.476, "growth": 7.98, "bill": 9505, "gia_tri_bill": 129639, "fresh_sl": 35343.4, "canh_bao_goc": "Về đích", "rev_week": [0.535, 0.53, 0.572, 0.575], "bill_week": [604, 611, 617, 646]}, {"id": 31290, "name": "BHX_HCM_TMT - 220/18 XVNT", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 1.165, "rev_prev": 1.189, "target": 1.248, "growth": -1.95, "bill": 5843, "gia_tri_bill": 96516, "fresh_sl": 21784.4, "canh_bao_goc": "Theo dõi", "rev_week": [0.268, 0.273, 0.253, 0.261], "bill_week": [386, 393, 371, 407]}, {"id": 30205, "name": "BHX_HCM_TMT - 69/2/44 Nguyễn Gia Trí", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 1.912, "rev_prev": 1.706, "target": 1.791, "growth": 12.08, "bill": 9252, "gia_tri_bill": 99983, "fresh_sl": 29325.2, "canh_bao_goc": "Về đích", "rev_week": [0.377, 0.403, 0.435, 0.434], "bill_week": [568, 601, 615, 635]}, {"id": 30247, "name": "BHX_HCM_TMT - 79 Võ Oanh", "qltp_code": "55321", "qltp_name": "Cẩm Trinh", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 1.49, "rev_prev": 1.356, "target": 1.424, "growth": 9.85, "bill": 7944, "gia_tri_bill": 90760, "fresh_sl": 21966.3, "canh_bao_goc": "Về đích", "rev_week": [0.266, 0.354, 0.341, 0.321], "bill_week": [425, 541, 534, 538]}, {"id": 31053, "name": "BHX_HCM_TMT - Vinhome Central Park 1", "qltp_code": "49559", "qltp_name": "Quốc Liêm", "vitri_key": "tuidancu", "quan": "BTH", "moi_cu": "New2026", "rev": 1.197, "rev_prev": 1.013, "target": 1.064, "growth": 18.14, "bill": 6001, "gia_tri_bill": 96540, "fresh_sl": 30468.7, "canh_bao_goc": "Về đích", "rev_week": [0.264, 0.276, 0.247, 0.292], "bill_week": [398, 387, 383, 428]}, {"id": 15795, "name": "BHX_HCM_TNP - 68 Tăng Nhơn Phú", "qltp_code": "24008", "qltp_name": "Minh Nhật", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "New2026", "rev": 1.3, "rev_prev": 1.176, "target": 1.235, "growth": 10.56, "bill": 6053, "gia_tri_bill": 103931, "fresh_sl": 19844.5, "canh_bao_goc": "Về đích", "rev_week": [0.27, 0.257, 0.287, 0.297], "bill_week": [388, 364, 400, 416]}, {"id": 15803, "name": "BHX_HCM_TPN - 172 Lê Văn Việt", "qltp_code": "56779", "qltp_name": "Xuân Nam", "vitri_key": "tuidancu", "quan": "TDU", "moi_cu": "OLD", "rev": 1.002, "rev_prev": 0.867, "target": 0.91, "growth": 15.64, "bill": 4383, "gia_tri_bill": 110626, "fresh_sl": 10557.1, "canh_bao_goc": "Về đích", "rev_week": [0.194, 0.2, 0.214, 0.225], "bill_week": [281, 277, 280, 306]}, {"id": 15766, "name": "BHX_HCM_TTA - 222A Trần Đại Nghĩa", "qltp_code": "27506", "qltp_name": "Bá Thành", "vitri_key": "tuidancu", "quan": "BTA", "moi_cu": "OLD", "rev": 1.389, "rev_prev": 1.364, "target": 1.432, "growth": 1.83, "bill": 5664, "gia_tri_bill": 118660, "fresh_sl": 13668.3, "canh_bao_goc": "Theo dõi", "rev_week": [0.311, 0.292, 0.31, 0.323], "bill_week": [385, 366, 378, 381]}]};
+</script>
+<script>
+/* Dashboard Doanh Thu Miền Trung Đức — bản chính thức, vanilla JS, không phụ thuộc thư viện ngoài.
+   Dữ liệu trong window.DATA là DỮ LIỆU THẬT, trích xuất & đối chiếu từ file
+   "BC DTHU THU THÁNG.xlsx" (nguồn: OneDrive BC DOANH THU) — 11 QLTP, 209 siêu thị. */
+(function () {
+  const DATA = window.DATA;
+  const BASKET_LIST = DATA.basket_list; // [{key,label,icon,n,rev,rev_prev}] — 4 nhóm vị trí mặt bằng thật
+  const KHOI_UI_MAP = { FMCG: "FMCG", FRESH: "Fresh", "ĐM": "Đông mát", "GIA DỤNG": "FMCG" };
+  const NHOM_NGANH = {};
+  ["top_tang_thang", "top_giam_thang", "top_tang_tuan", "top_giam_tuan"].forEach((k) => {
+    (DATA[k] || []).forEach((r) => { NHOM_NGANH[r.name] = KHOI_UI_MAP[r.khoi] || r.khoi; });
+  });
+  const DAYS_MONTH = DATA.meta.ngay_trong_thang || 31;
+  const DEFAULT_QLTP = DATA.qltp[0] ? DATA.qltp[0].code : "88365";
+
+  const STATE = {
+    tab: "mien",
+    period: "month",
+    qltp: "all",      // 'all' (chỉ dùng ở tab mien) hoặc mã QLTP
+    store: "all",     // 'all' hoặc Mã ST
+    nganh: "all",     // 'all' | 'FMCG' | 'Fresh' | 'Đông mát'
+    nhom: "all",      // 'all' hoặc tên nhóm hàng
+    basket: BASKET_LIST[0] ? BASKET_LIST[0].key : "kingfood",
+    ro: "all",
+    roFresh: "all",
+  };
+
+  // ---------- format helpers ----------
+  const fmt1 = (n) => (Math.round(n * 10) / 10).toLocaleString("vi-VN", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const fmtInt = (n) => Math.round(n).toLocaleString("vi-VN");
+  const pct = (n) => (n === null || n === undefined ? "—" : (n >= 0 ? "+" : "") + fmt1(n) + "%");
+  const arrow = (n) => (n === null || n === undefined ? "•" : n >= 0 ? "↑" : "↓");
+  const dcls = (n) => (n === null || n === undefined ? "" : n >= 0 ? "up" : "down");
+  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+  function qltpByCode(c) { return DATA.qltp.find((q) => q.code === c); }
+  function storesOf(code) { return DATA.stores.filter((s) => s.qltp_code === code); }
+  function scopedStores(code) {
+    let list = storesOf(code);
+    if (STATE.store !== "all") list = list.filter((s) => String(s.id) === String(STATE.store));
+    return list;
+  }
+  function effectiveQltpCode() { return STATE.qltp === "all" ? DEFAULT_QLTP : STATE.qltp; }
+  function basketOf(key) { return BASKET_LIST.find((b) => b.key === key); }
+
+  function statusTier(p) {
+    if (p >= 100) return { label: "Về đích", cls: "ok" };
+    if (p >= 90) return { label: "Theo dõi", cls: "watch" };
+    if (p >= 75) return { label: "Cần push", cls: "push" };
+    return { label: "Báo động", cls: "danger" };
+  }
+  function pctHT(cur, target) { return target ? (cur / target) * 100 : 0; }
+  function tierFor(rev, realTarget) {
+    if (!realTarget) return { label: "Mới mở", cls: "new" };
+    return statusTier(pctHT(rev, realTarget));
+  }
+
+  // ---------- vị trí (rổ) — dùng thẳng vitri_key thật, không còn suy diễn ----------
+  function storeBasketKey(s) { return s.vitri_key; }
+  function qOf(s) { return qltpByCode(s.qltp_code); }
+
+  // Doanh thu/bill theo tuần ở cấp siêu thị là dữ liệu THẬT (từ DATA DTHU TUẦN, đã đối chiếu khớp
+  // với số Miền/QLTP đã audit) — chỉ khi thiếu (shop quá mới, chưa có đủ tuần) mới suy ra theo tỉ lệ
+  // tuần/tháng thật của QLTP quản lý làm phương án dự phòng.
+  function storeRevForPeriod(s) {
+    if (STATE.period === "month") return s.rev;
+    if (s.rev_week && s.rev_week[3] !== null && s.rev_week[3] !== undefined) return s.rev_week[3];
+    const q = qOf(s);
+    const ratio = q && q.rev_month[2] ? q.rev_week[3] / q.rev_month[2] : 0.23;
+    return s.rev * ratio;
+  }
+  function storePrevRevForPeriod(s) {
+    if (STATE.period === "month") return s.rev_prev;
+    if (s.rev_week && s.rev_week[2] !== null && s.rev_week[2] !== undefined) return s.rev_week[2];
+    const q = qOf(s);
+    const ratio = q && q.rev_month[1] ? q.rev_week[2] / q.rev_month[1] : 0.23;
+    return s.rev_prev * ratio;
+  }
+  function storeGrowthForPeriod(s) {
+    if (STATE.period === "month") return s.growth === null || s.growth === undefined ? null : s.growth;
+    if (s.rev_week && s.rev_week[3] !== null && s.rev_week[2] !== null && s.rev_week[2] !== undefined && s.rev_week[2] !== 0) {
+      return ((s.rev_week[3] - s.rev_week[2]) / s.rev_week[2]) * 100;
+    }
+    if (s.growth === null || s.growth === undefined) return null;
+    const q = qOf(s);
+    if (!q || !q.rev_week[2] || !q.growth_pct) return s.growth;
+    const weekG = ((q.rev_week[3] - q.rev_week[2]) / q.rev_week[2]) * 100;
+    return s.growth * (weekG / q.growth_pct);
+  }
+  // Target "kịch bản +5%" — dùng cho khối Trung tâm quyết định (khác Target thật của công ty)
+  function storeScenarioTarget(s) { return storePrevRevForPeriod(s) * 1.05; }
+  // Target thật (từ file khai báo) — dùng cho %HT Target / trạng thái
+  function storeRealTargetForPeriod(s) { return STATE.period === "month" ? s.target : s.target / 4.35; }
+  // Ước tính tăng/giảm do Bill hay do Giá trị bill: phân rã tăng trưởng doanh thu thật của
+  // từng siêu thị theo đúng tỉ lệ Bill/Giá trị bill mà QLTP quản lý đang ghi nhận thật (grounded,
+  // không phải số ngẫu nhiên) — vì file chưa có Bill/Giá trị bill kỳ trước ở cấp từng siêu thị.
+  function storeDriverSplit(s) {
+    const g = storeGrowthForPeriod(s);
+    const q = qOf(s);
+    if (g === null || !q) return { bill: null, abv: null };
+    const denom = q.bill_growth + q.abv_growth;
+    if (!denom) return { bill: g / 2, abv: g / 2 };
+    return { bill: g * (q.bill_growth / denom), abv: g * (q.abv_growth / denom) };
+  }
+  function basketRevForPeriod(key) { return DATA.stores.filter((s) => s.vitri_key === key).reduce((s, x) => s + storeRevForPeriod(x), 0); }
+  function basketPrevRevForPeriod(key) { return DATA.stores.filter((s) => s.vitri_key === key).reduce((s, x) => s + storePrevRevForPeriod(x), 0); }
+
+  const WEEK_LABELS = DATA.week_labels || ["W30", "W31", "W32", "W33"]; // đọc thẳng từ header "Khóa tuần" thật của file, không hardcode ngày
+  const MONTH_LABELS = ["06/2026", "07/2026", "08/2026"];
+  const CAL_MONTH_LABELS = ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10", "T11", "T12"];
+  const CUR_MONTH_IDX0 = (parseInt(String(DATA.meta.thang_hien_tai || "T8").replace(/\D/g, ""), 10) || 8) - 1; // 0-based
+
+  function mienWeeklyBill() { return [0, 1, 2, 3].map((i) => DATA.qltp.reduce((s, q) => s + (q.bill_week ? q.bill_week[i] : 0), 0)); }
+  function mienWeeklyFresh() { return [0, 1, 2, 3].map((i) => DATA.qltp.reduce((s, q) => s + (q.fresh_week ? q.fresh_week[i] : 0), 0)); }
+
+  function mienSeries() {
+    if (STATE.period === "month") {
+      return {
+        labels: MONTH_LABELS, rev: DATA.mien_rev_month, bill: DATA.mien_bill_month, fresh: DATA.mien_fresh_month,
+        cur: 2, prev: 1, target: DATA.mien_target, daysInPeriod: DAYS_MONTH,
+      };
+    }
+    return {
+      labels: WEEK_LABELS, rev: DATA.mien_rev_week, bill: mienWeeklyBill(), fresh: mienWeeklyFresh(),
+      cur: 3, prev: 2, target: DATA.mien_target / 4.35, daysInPeriod: 7,
+    };
+  }
+
+  function qltpSeries(q) {
+    if (STATE.period === "month") {
+      return { labels: MONTH_LABELS, rev: q.rev_month, bill: q.bill_month, fresh: q.fresh_month, cur: 2, prev: 1, target: q.target_month, daysInPeriod: DAYS_MONTH };
+    }
+    return { labels: WEEK_LABELS, rev: q.rev_week, bill: q.bill_week, fresh: q.fresh_week, cur: 3, prev: 2, target: q.target_month / 4.35, daysInPeriod: 7 };
+  }
+
+  function last3(arr, labels) {
+    const n = arr.length;
+    return [0, 1, 2].map((i) => ({ label: labels[n - 3 + i], value: arr[n - 3 + i] }));
+  }
+  function growthOfHist(hist3) { return hist3[1].value ? ((hist3[2].value - hist3[1].value) / hist3[1].value) * 100 : 0; }
+
+  function giaTriBillNghin(revTy, billPerDay, days) {
+    if (!billPerDay) return 0;
+    const revVnd = revTy * 1e9;
+    const totalBill = billPerDay * days;
+    return revVnd / totalBill / 1000;
+  }
+
+  // ---------- decision / bottleneck logic (cấp Miền) ----------
+  function decisionRowsMien() {
+    let src = DATA.qltp;
+    if (STATE.qltp !== "all") src = src.filter((q) => q.code === STATE.qltp);
+    const rows = src.map((q) => {
+      const s = qltpSeries(q);
+      const cur = s.rev[s.cur];
+      const target = s.target;
+      const gap = cur - target;
+      const bothPositive = q.bill_growth >= 0 && q.abv_growth >= 0;
+      let driverLabel, action;
+      const driverIsBill = q.bill_growth <= q.abv_growth;
+      if (bothPositive) {
+        driverLabel = `Cả Bill (${pct(q.bill_growth)}) và Giá trị bill (${pct(q.abv_growth)}) đều tăng, nhưng chưa đủ bù Target`;
+        action = "Đẩy nhanh tốc độ tăng hiện tại · nhân rộng cách làm đang hiệu quả";
+      } else if (driverIsBill) {
+        driverLabel = `Lượt bill giảm ${fmt1(Math.abs(q.bill_growth))}%`;
+        action = "Phục hồi lượt bill · rà soát OOS, giá và tồn SKU chủ lực";
+      } else {
+        driverLabel = `Giá trị bill giảm ${fmt1(Math.abs(q.abv_growth))}%`;
+        action = "Tăng giá trị bill · rà cơ cấu giỏ hàng & KM tại nhóm giảm";
+      }
+      const qStores = DATA.stores.filter((st) => st.qltp_code === q.code);
+      const below = qStores.filter((st) => st.target && st.rev < st.target).length;
+      const nganh = `${below}/${qStores.length} shop dưới Target`;
+      return { name: `QLTP ${q.name}`, code: q.code, gap, driverLabel, nganh, action, owner: q.name };
+    });
+    rows.sort((a, b) => a.gap - b.gap);
+    const negatives = rows.filter((r) => r.gap < 0);
+    const top = (negatives.length >= 4 ? negatives : rows).slice(0, 4);
+    const totalGap = top.reduce((s, r) => s + Math.abs(Math.min(r.gap, 0)), 0) || 1;
+    const colors = ["do", "do", "cam", "vang"];
+    return top.map((r, i) => ({ ...r, color: colors[i] || "xam", share: clamp((Math.abs(Math.min(r.gap, 0)) / totalGap) * 100, 0, 100) }));
+  }
+
+  function decisionRowsQltp(code) {
+    const rows = scopedStores(code).map((st) => {
+      const rev = storeRevForPeriod(st);
+      const growth = storeGrowthForPeriod(st);
+      const target = storeScenarioTarget(st);
+      const gap = rev - target;
+      const b = basketOf(st.vitri_key);
+      return { name: `${st.id} · ${st.name}`, vitri: b ? `${b.icon} ${b.label}` : "—", gap, growth, rev };
+    });
+    rows.sort((a, b) => a.gap - b.gap);
+    const negatives = rows.filter((r) => r.gap < 0);
+    const top = (negatives.length >= 4 ? negatives : rows).slice(0, 4);
+    const colors = ["do", "do", "cam", "vang"];
+    return top.map((r, i) => ({ ...r, color: colors[i] || "xam" }));
+  }
+
+  // ---------- SVG charts ----------
+  // values có thể chứa null (kỳ chưa có dữ liệu thật) — chỉ vẽ điểm/đoạn nối cho các kỳ có số liệu,
+  // vị trí trục X vẫn tính theo đúng chỉ số kỳ trong totalSlots để chừa chỗ cho các kỳ chưa tới / chưa có dữ liệu.
+  function sparklineLabeled(values, w, h, color, fmtVal, totalSlots) {
+    const slots = totalSlots || values.length;
+    const present = values.map((v, i) => ({ v, i })).filter((p) => p.v !== null && p.v !== undefined);
+    if (!present.length) return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}"></svg>`;
+    const vals = present.map((p) => p.v);
+    const min = Math.min(...vals), max = Math.max(...vals);
+    const pad = (max - min) * 0.3 || 1;
+    const lo = min - pad, hi = max + pad;
+    const margin = 26;
+    const usableW = w - margin * 2;
+    const stepX = slots > 1 ? usableW / (slots - 1) : 0;
+    const top = 26, bottom = h - 4;
+    const xAt = (i) => margin + i * stepX;
+    const yAt = (v) => bottom - ((v - lo) / (hi - lo)) * (bottom - top);
+    const path = present.map((p, idx) => {
+      const prev = idx > 0 ? present[idx - 1] : null;
+      const contiguous = prev && p.i === prev.i + 1;
+      return (contiguous ? "L" : "M") + xAt(p.i).toFixed(1) + "," + yAt(p.v).toFixed(1);
+    }).join(" ");
+    const dots = present.map((p) => `<circle cx="${xAt(p.i).toFixed(1)}" cy="${yAt(p.v).toFixed(1)}" r="3" fill="${color}"/>`).join("");
+    const labels = present.map((p, idx) => {
+      const prev = idx > 0 ? present[idx - 1] : null;
+      const g = prev ? ((p.v - prev.v) / prev.v) * 100 : null;
+      const gColor = g === null ? "#9aa39e" : g >= 0 ? "#2f8f5b" : "#d64545";
+      const gText = g === null ? "—" : (g >= 0 ? "+" : "") + fmt1(g) + "%";
+      return `<text x="${xAt(p.i).toFixed(1)}" y="11" font-size="9.5" text-anchor="middle" font-weight="700" fill="#16241f">${fmtVal(p.v)}</text>
+              <text x="${xAt(p.i).toFixed(1)}" y="21" font-size="8.5" text-anchor="middle" fill="${gColor}">${gText}</text>`;
+    }).join("");
+    return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}" preserveAspectRatio="none" style="overflow:visible">
+      <path d="${path}" fill="none" stroke="${color}" stroke-width="2.4" vector-effect="non-scaling-stroke"/>${dots}${labels}</svg>`;
+  }
+
+  // ---------- render pieces ----------
+  function elHeader() {
+    return `
+    <div class="pagehead">
+      <div>
+        <div class="eyebrow">1179 · MIỀN TRUNG ĐỨC · DỮ LIỆU CHÍNH THỨC</div>
+        <h1>Dashboard doanh thu</h1>
+        <p class="subtitle">Từ kết quả miền đến đơn vị đang tạo hoặc làm thiếu doanh thu — thay tab Doanh thu tại Trạm điều hành Miền</p>
+      </div>
+      <div class="status-pill"><span class="dot green"></span> Dữ liệu thật · đã đối chiếu · cập nhật đến ${DATA.meta.ngay_cap_nhat || "—"}</div>
+    </div>`;
+  }
+
+  function elTabsAndFilters() {
+    const periodBtns = `
+      <div class="periodtoggle">
+        <button class="${STATE.period === "month" ? "on" : ""}" onclick="App.setPeriod('month')">Tháng</button>
+        <button class="${STATE.period === "week" ? "on" : ""}" onclick="App.setPeriod('week')">Tuần</button>
+      </div>`;
+    const qltpOptions = (STATE.tab === "mien" ? [`<option value="all" ${STATE.qltp === "all" ? "selected" : ""}>Tất cả QLTP</option>`] : [])
+      .concat(DATA.qltp.map((q) => `<option value="${q.code}" ${STATE.qltp === q.code ? "selected" : ""}>${q.code} · ${q.name}</option>`))
+      .join("");
+    const storeScope = STATE.qltp === "all" ? DATA.stores : storesOf(STATE.qltp);
+    const storeOptions = [`<option value="all" ${STATE.store === "all" ? "selected" : ""}>Tất cả siêu thị</option>`]
+      .concat(storeScope.map((s) => `<option value="${s.id}" ${String(STATE.store) === String(s.id) ? "selected" : ""}>${s.id} · ${s.name}</option>`))
+      .join("");
+    const nganhOptions = ["all", "FMCG", "Fresh", "Đông mát"]
+      .map((n) => `<option value="${n}" ${STATE.nganh === n ? "selected" : ""}>${n === "all" ? "Tất cả ngành hàng" : n}</option>`)
+      .join("");
+    const nhomList = Object.keys(NHOM_NGANH).filter((n) => STATE.nganh === "all" || NHOM_NGANH[n] === STATE.nganh);
+    const nhomOptions = [`<option value="all">Tất cả nhóm hàng</option>`]
+      .concat(nhomList.map((n) => `<option value="${n}" ${STATE.nhom === n ? "selected" : ""}>${n}</option>`))
+      .join("");
+    return `
+    <div class="tabs">
+      <div class="tabgroup">
+        <button class="tabbtn ${STATE.tab === "mien" ? "on" : ""}" onclick="App.setTab('mien')">01 · Tổng quan miền</button>
+        <button class="tabbtn ${STATE.tab === "qltp" ? "on" : ""}" onclick="App.setTab('qltp')">02 · Tổng quan khu vực</button>
+      </div>
+      ${periodBtns}
+    </div>
+    <div class="filters">
+      <div class="filtercol"><label>Kỳ đang chọn</label><div class="kyfixed">${STATE.period === "month" ? "08/2026" : DATA.meta.tuan_hien_tai || "—"}</div></div>
+      <div class="filtercol"><label>QLTP</label><select onchange="App.setQltpFilter(this.value)">${qltpOptions}</select></div>
+      <div class="filtercol"><label>Siêu thị</label><select onchange="App.setStoreFilter(this.value)">${storeOptions}</select></div>
+      <div class="filtercol"><label>Ngành hàng</label><select onchange="App.setNganh(this.value)">${nganhOptions}</select></div>
+      <div class="filtercol"><label>Nhóm hàng</label><select onchange="App.setNhom(this.value)">${nhomOptions}</select></div>
+    </div>`;
+  }
+
+  function kpiCard(label, value, unit, deltaPct, hist) {
+    return `
+    <div class="kpi">
+      <div class="top"><span class="label">${label}</span><span class="delta ${dcls(deltaPct)}">${arrow(deltaPct)} ${deltaPct === null ? "—" : fmt1(Math.abs(deltaPct)) + "%"}</span></div>
+      <div class="value">${value}<span style="font-size:14px;font-weight:700;color:var(--muted);margin-left:4px">${unit}</span></div>
+      <div class="hist">${hist.map((h, i) => `<div class="${i === hist.length - 1 ? "cur" : ""}"><span class="m">${h.label}</span><b>${h.valueStr}</b></div>`).join("")}</div>
+    </div>`;
+  }
+
+  function kpiRowFor(series) {
+    const cur = series.rev[series.cur], prev = series.rev[series.prev];
+    const revGrowth = prev ? ((cur - prev) / prev) * 100 : null;
+    const billCur = series.bill[series.cur], billPrev = series.bill[series.prev];
+    const billGrowth = billPrev ? ((billCur - billPrev) / billPrev) * 100 : null;
+    const freshCur = series.fresh[series.cur], freshPrev = series.fresh[series.prev];
+    const freshGrowth = freshPrev ? ((freshCur - freshPrev) / freshPrev) * 100 : null;
+    const gtbCur = giaTriBillNghin(cur, billCur, series.daysInPeriod);
+    const gtbPrev = giaTriBillNghin(prev, billPrev, series.daysInPeriod);
+    const gtbGrowth = gtbPrev ? ((gtbCur - gtbPrev) / gtbPrev) * 100 : null;
+    const revHist = last3(series.rev, series.labels).map((h) => ({ label: h.label, valueStr: fmt1(h.value) + " tỷ" }));
+    const billHist = last3(series.bill, series.labels).map((h) => ({ label: h.label, valueStr: fmtInt(h.value) + " bill" }));
+    const freshHist = last3(series.fresh, series.labels).map((h) => ({ label: h.label, valueStr: fmtInt(h.value) + " kg" }));
+    const gtbSeries = series.rev.map((r, i) => giaTriBillNghin(r, series.bill[i], series.daysInPeriod));
+    const gtbHist = last3(gtbSeries, series.labels).map((h) => ({ label: h.label, valueStr: fmtInt(h.value) + " k" }));
+    return `<div class="kpirow">
+      ${kpiCard("Tổng doanh thu", fmt1(cur), "tỷ", revGrowth, revHist)}
+      ${kpiCard("Bill TB / ngày", fmtInt(billCur), "bill", billGrowth, billHist)}
+      ${kpiCard("Sản lượng Fresh", fmtInt(freshCur), "kg", freshGrowth, freshHist)}
+      ${kpiCard("Giá trị bill", fmtInt(gtbCur), "nghìn", gtbGrowth, gtbHist)}
+    </div>`;
+  }
+
+  function elDecisionCenterMien() {
+    const rows = decisionRowsMien();
+    const totalGap = rows.reduce((s, r) => s + Math.max(0, -r.gap), 0);
+    const labelIcon = { do: "Đỏ", cam: "Cam", vang: "Vàng", xam: "Xám" };
+    return `
+    <div class="panel">
+      <div class="panelhead">
         <div>
-          <h2 class="topic-title">Doanh thu</h2>
-          <div class="topic-meta-row"><span class="cadence">Mỗi ngày</span><span class="status ok"><span class="status-dot"></span>Đạt</span></div>
+          <div class="eyebrow2">TRUNG TÂM QUYẾT ĐỊNH</div>
+          <h2>Hôm nay cần xử lý việc gì để lấy lại doanh thu?</h2>
+          <p>Xếp ưu tiên theo doanh thu thiếu, mức đóng góp và độ kéo dài của xu hướng · kỳ: ${STATE.period === "month" ? "tháng" : "tuần"}${STATE.qltp !== "all" ? ` · đang lọc QLTP ${qltpByCode(STATE.qltp).name}` : ""}</p>
+        </div>
+        <div class="decision-total"><div class="n">${fmt1(totalGap)} tỷ</div><div class="l">DT thiếu cần xử lý · ${rows.length} vấn đề</div></div>
+      </div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Ưu tiên</th><th>Đối tượng</th><th>Doanh thu thiếu</th><th>Nguyên nhân gốc</th><th>Nơi phát sinh</th><th>Đóng góp phần thiếu</th><th>Quyết định / hành động</th><th>Phụ trách</th></tr></thead>
+        <tbody>
+        ${rows.map((r, i) => `<tr>
+          <td><div class="prio ${r.color}">${i + 1}</div><span class="tagtxt">${labelIcon[r.color]}</span></td>
+          <td><b>${r.name}</b></td>
+          <td class="${r.gap < 0 ? "neg" : "pos"}">${arrow(r.gap)} ${fmt1(Math.abs(r.gap))} tỷ</td>
+          <td>${r.driverLabel}<div class="small">Động lực gốc</div></td>
+          <td>${r.nganh}<div class="small">Nơi phát sinh</div></td>
+          <td>${Math.round(r.share)}%<span class="bar-outer"><span class="bar-inner" style="width:${Math.round(r.share)}%"></span></span></td>
+          <td>${r.action}</td>
+          <td>${r.owner}</td>
+        </tr>`).join("")}
+        </tbody>
+      </table></div>
+      <div class="legend-row">
+        <span><b>Đỏ</b> Hành động ngay: giảm 2 kỳ + không đạt Target + DT thiếu lớn</span>
+        <span><b>Cam</b> Điều tra: một động lực chính giảm mạnh</span>
+        <span><b>Vàng</b> Theo dõi: giảm nhưng mức ảnh hưởng còn thấp</span>
+        <span><b>Xám</b> Chưa đủ dữ liệu / shop mới</span>
+      </div>
+    </div>`;
+  }
+
+  // monthData/weekData: {rev:[...], bill:[...], fresh:[...]} — monthData có đúng 3 giá trị thật
+  // (2 tháng trước + tháng hiện tại dự kiến), được đặt đúng vị trí lịch (T06–T08...) trên trục 12 tháng
+  // để chừa chỗ chạy đến T12; weekData có đúng 4 giá trị thật (tuần hiện tại + 3 tuần trước).
+  function elTrendPanel(title, sub, monthData, weekData) {
+    let labels, totalSlots, dataFor, curIdx0 = null, rangeStartIdx = null;
+    if (STATE.period === "month") {
+      // Đặt mảng kết thúc đúng tại tháng hiện tại (CUR_MONTH_IDX0); mảng có thể dài 3 (theo QLTP, chỉ có T06-T08)
+      // hoặc dài hơn (cấp Miền, có thể có tới T01) — không hardcode độ dài 3 để không giới hạn số tháng thật.
+      const place = (arr) => {
+        const out = new Array(12).fill(null);
+        const n = arr.length;
+        for (let k = 0; k < n; k++) {
+          const idx = CUR_MONTH_IDX0 - (n - 1) + k;
+          if (idx >= 0 && idx < 12) out[idx] = arr[k];
+        }
+        return out;
+      };
+      labels = CAL_MONTH_LABELS; totalSlots = 12; curIdx0 = CUR_MONTH_IDX0;
+      dataFor = { rev: place(monthData.rev), bill: place(monthData.bill), fresh: place(monthData.fresh) };
+      const realCount = dataFor.rev.filter((v) => v !== null && v !== undefined).length;
+      rangeStartIdx = CUR_MONTH_IDX0 - Math.max(realCount - 1, 0);
+    } else {
+      labels = WEEK_LABELS; totalSlots = 4;
+      dataFor = weekData;
+    }
+    const lastTwoNonNull = (arr) => {
+      const idxs = [];
+      for (let i = arr.length - 1; i >= 0 && idxs.length < 2; i--) if (arr[i] !== null && arr[i] !== undefined) idxs.unshift(i);
+      return idxs.length === 2 ? [arr[idxs[0]], arr[idxs[1]]] : null;
+    };
+    const growthLast = (arr) => { const lt = lastTwoNonNull(arr); return lt && lt[0] ? ((lt[1] - lt[0]) / lt[0]) * 100 : null; };
+    const lastVal = (arr) => { for (let i = arr.length - 1; i >= 0; i--) if (arr[i] !== null && arr[i] !== undefined) return arr[i]; return 0; };
+    const rows = [
+      { label: "DOANH THU", unit: "tỷ", data: dataFor.rev, color: "#0b6b45", fmt: (v) => fmt1(v) },
+      { label: "LƯỢT BILL / NGÀY", unit: "bill", data: dataFor.bill, color: "#3478c9", fmt: (v) => fmtInt(v) },
+      { label: "SL FRESH", unit: "kg", data: dataFor.fresh, color: "#e4a52f", fmt: (v) => fmtInt(v) },
+    ];
+    const monthRangeText = rangeStartIdx !== null
+      ? (rangeStartIdx === curIdx0 ? `1 tháng có dữ liệu thật (${CAL_MONTH_LABELS[curIdx0]}), chừa trục đến T12`
+        : `${curIdx0 - rangeStartIdx + 1} tháng có dữ liệu thật (${CAL_MONTH_LABELS[rangeStartIdx]}–${CAL_MONTH_LABELS[curIdx0]}), chừa trục đến T12`)
+      : null;
+    return `
+    <div class="panel">
+      <div class="panelhead">
+        <div><div class="eyebrow2">DIỄN BIẾN THEO SỐ LIỆU THẬT</div><h2>${title}</h2><p>${sub} · ${totalSlots === 4 ? "4 tuần gần nhất" : monthRangeText}, kỳ hiện tại là số dự kiến hết kỳ (đến ${DATA.meta.ngay_cap_nhat || "—"})</p>${monthData.note ? `<p style="margin-top:4px;font-size:11.5px;color:var(--muted)">${monthData.note}</p>` : ""}</div>
+        <span class="pill">Dự kiến</span>
+      </div>
+      ${rows.map((r) => `
+      <div class="chartrow">
+        <div class="chartinfo">
+          <div class="l">${r.label}</div>
+          <div class="v">${r.fmt(lastVal(r.data))} <span style="font-size:12px;color:var(--muted)">${r.unit}</span></div>
+          <div class="g ${dcls(growthLast(r.data))}">${arrow(growthLast(r.data))} ${growthLast(r.data) === null ? "—" : fmt1(Math.abs(growthLast(r.data))) + "%"} so kỳ trước</div>
+        </div>
+        <div class="chartsvgwrap"><div style="min-width:640px">${sparklineLabeled(r.data, 780, 90, r.color, r.fmt, totalSlots)}
+          <div style="display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);margin-top:2px">
+            ${labels.map((m, i) => `<span style="${curIdx0 !== null && i > curIdx0 ? "opacity:.4" : ""}">${m}${i === curIdx0 ? " *" : ""}</span>`).join("")}
+          </div>
+        </div></div>
+      </div>`).join("")}
+      ${curIdx0 !== null ? `<div class="footnote">* Số dự kiến hết ${MONTH_LABELS[2]} · ${rangeStartIdx > 0 ? `các tháng trước ${CAL_MONTH_LABELS[rangeStartIdx]} chưa có trong file dữ liệu, ` : ""}các tháng sau T08 chưa tới kỳ.</div>` : ""}
+    </div>`;
+  }
+
+  function blockCard(name, share, hist3, growth, unit) {
+    return `<div class="blockcard">
+      <div class="bh"><span>${name}</span><span class="share">${fmt1(share * 100)}% tổng DT</span></div>
+      <div class="hist">${hist3.map((h, i) => `<div class="${i === hist3.length - 1 ? "cur" : ""}"><span class="m" style="display:block;color:var(--muted)">${h.label}</span><b>${fmt1(h.value)} ${unit}</b></div>`).join("")}</div>
+      <div class="growth ${dcls(growth)}">${arrow(growth)} ${fmt1(Math.abs(growth))}% <span class="small" style="font-weight:400">so với cùng kỳ</span></div>
+    </div>`;
+  }
+
+  // Tăng trưởng thật từng khối (từ khoi_hist thật, cấp Miền theo tháng) — dùng làm phần "chênh lệch"
+  // để mỗi khối có tăng trưởng khác nhau thay vì giống hệt nhau, ngay cả khi scope là QLTP/tuần
+  // (nơi chưa có dữ liệu cơ cấu riêng, phải suy ra tỷ trọng theo cơ cấu Miền).
+  const KHOI_REAL_GROWTH = { fmcg: growthOfHist(last3(DATA.khoi_hist.fmcg, MONTH_LABELS)), fresh: growthOfHist(last3(DATA.khoi_hist.fresh, MONTH_LABELS)), dongmat: growthOfHist(last3(DATA.khoi_hist.dongmat, MONTH_LABELS)) };
+  const KHOI_AVG_GROWTH = Object.keys(KHOI_REAL_GROWTH).reduce((s, k) => s + DATA.cat3[k] * KHOI_REAL_GROWTH[k], 0);
+
+  function elCoCau3Khoi(series, scopeLabel) {
+    const labels = series.labels;
+    const mk = (share) => last3(series.rev.map((r) => r * share), labels);
+    const overallG = growthOfHist(last3(series.rev, labels));
+    const defs = [{ key: "fmcg", label: "FMCG" }, { key: "fresh", label: "Fresh" }, { key: "dongmat", label: "Đông mát" }];
+    const blocks = defs.map((d) => {
+      const share = DATA.cat3[d.key];
+      const hist3 = mk(share);
+      const growth = overallG + (KHOI_REAL_GROWTH[d.key] - KHOI_AVG_GROWTH);
+      return { key: d.label, node: blockCard(d.label, share, hist3, growth, "tỷ") };
+    });
+    const shown = STATE.nganh === "all" ? blocks : blocks.filter((b) => b.key === STATE.nganh);
+    return `
+    <div class="panel">
+      <div class="panelhead"><div><div class="eyebrow2">CƠ CẤU</div><h2>Cơ cấu doanh thu 3 khối hàng lớn</h2><p>${scopeLabel} · tăng trưởng so với cùng kỳ${STATE.nganh !== "all" ? ` · đang lọc: ${STATE.nganh}` : ""} · GIA DỤNG đã gộp vào FMCG</p></div><span class="pill">ĐVT: tỷ đồng</span></div>
+      <div class="grid3">${shown.map((b) => b.node).join("")}</div>
+    </div>`;
+  }
+
+  function elTop5(scopeLabel) {
+    const passFilter = (name) => (STATE.nganh === "all" || NHOM_NGANH[name] === STATE.nganh) && (STATE.nhom === "all" || STATE.nhom === name);
+    const upSrc = STATE.period === "month" ? DATA.top_tang_thang : DATA.top_tang_tuan;
+    const downSrc = STATE.period === "month" ? DATA.top_giam_thang : DATA.top_giam_tuan;
+    const rowsUp = (upSrc || []).map((r) => ({ name: r.name, prev: r.truoc, cur: r.sau, g: r.pct })).filter((r) => passFilter(r.name));
+    const rowsDown = (downSrc || []).map((r) => ({ name: r.name, prev: r.truoc, cur: r.sau, g: r.pct })).filter((r) => passFilter(r.name));
+    const prevLabel = STATE.period === "month" ? MONTH_LABELS[1] : WEEK_LABELS[2];
+    const curLabel = STATE.period === "month" ? MONTH_LABELS[2] : WEEK_LABELS[3];
+    const tbl = (rows) => rows.length
+      ? `<div class="tablewrap"><table><thead><tr><th>Nhóm hàng</th><th>${prevLabel}</th><th>${curLabel}</th><th>Tăng/giảm</th><th>% thay đổi</th></tr></thead>
+      <tbody>${rows.map((r) => `<tr><td><b>${r.name}</b></td><td>${fmt1(r.prev)} tỷ</td><td>${fmt1(r.cur)} tỷ</td>
+      <td class="${dcls(r.cur - r.prev)}">${arrow(r.cur - r.prev)} ${fmt1(Math.abs(r.cur - r.prev))} tỷ</td>
+      <td class="${dcls(r.g)}">${pct(r.g)}</td></tr>`).join("")}</tbody></table></div>`
+      : `<div class="footnote">Không có nhóm hàng nào khớp bộ lọc Ngành hàng / Nhóm hàng đang chọn.</div>`;
+    return `<div class="grid2">
+      <div class="panel"><div class="panelhead"><div><h2>Top 5 nhóm hàng kéo ${scopeLabel} đi lên</h2><p class="small">Số liệu toàn miền (file chưa tách theo QLTP)${STATE.period === "week" ? " · file nguồn chỉ có 2 kỳ tuần (không có 3 tuần gần nhất) cho Top 5 theo nhóm hàng" : ""}</p></div><span class="pill" style="background:var(--green-bg);color:var(--good)">TẠO TĂNG TRƯỞNG</span></div>${tbl(rowsUp)}</div>
+      <div class="panel"><div class="panelhead"><div><h2>Top 5 nhóm hàng kéo ${scopeLabel} đi xuống</h2><p class="small">Số liệu toàn miền (file chưa tách theo QLTP)${STATE.period === "week" ? " · file nguồn chỉ có 2 kỳ tuần (không có 3 tuần gần nhất) cho Top 5 theo nhóm hàng" : ""}</p></div><span class="pill" style="background:var(--danger-bg);color:var(--bad)">LÀM GIẢM TRƯỞNG</span></div>${tbl(rowsDown)}</div>
+    </div>`;
+  }
+
+  function elFreshNganh(series, scopeLabel) {
+    if (STATE.nganh !== "all" && STATE.nganh !== "Fresh") {
+      return `<div class="panel"><div class="panelhead"><div><div class="eyebrow2">FRESH</div><h2>Hiệu quả ngành hàng Fresh</h2></div></div><div class="footnote">Đang lọc Ngành hàng = ${STATE.nganh}, không thuộc Fresh — chọn "Tất cả ngành hàng" hoặc "Fresh" để xem phần này.</div></div>`;
+    }
+    const list = STATE.nhom === "all" ? DATA.fresh4 : DATA.fresh4.filter((f) => f.name === STATE.nhom);
+    // Dùng thẳng doanh thu · tăng trưởng THẬT của từng nhóm hàng Fresh (f.hist / f.g, cấp Miền theo Tháng) —
+    // không nhân tỷ trọng vào tổng doanh thu của scope đang xem, vì như vậy sẽ luôn ra cùng 1 mức tăng trưởng
+    // cho mọi nhóm hàng (một hằng số nhân không đổi thứ hạng tăng trưởng). File chưa tách Fresh theo nhóm hàng
+    // ở cấp QLTP/Tuần nên panel này luôn hiển thị đúng số thật cấp Miền/Tháng, có ghi chú khi đang xem QLTP/Tuần.
+    const scopedNote = STATE.period === "week"
+      ? "Đang xem theo Tuần nhưng số Fresh theo nhóm hàng dưới đây vẫn là số THÁNG thật gần nhất (file chưa có Fresh theo nhóm hàng theo tuần)."
+      : (scopeLabel !== "toàn miền" ? "File chưa tách Fresh theo nhóm hàng ở cấp QLTP nên số dưới đây là số thật cấp toàn Miền." : "");
+    return `
+    <div class="panel">
+      <div class="panelhead"><div><div class="eyebrow2">FRESH</div><h2>Hiệu quả ngành hàng Fresh</h2><p>Doanh thu · sản lượng · tăng trưởng thật theo từng nhóm hàng Fresh (cấp Miền, theo Tháng) · Thực phẩm tươi sống đã gộp vào Thủy Hải Sản</p></div><span class="pill">${list.length} ngành hàng</span></div>
+      ${scopedNote ? `<div class="footnote" style="margin-bottom:12px">${scopedNote}</div>` : ""}
+      <div class="grid4">
+      ${list.map((f) => {
+        const hist3 = last3(f.hist, MONTH_LABELS);
+        const g = f.g;
+        const volTan = f.sl_t8 / 1000;
+        return `<div class="blockcard">
+          <div class="bh"><span>${f.name}</span><span class="share">${fmt1(f.share * 100)}% Fresh</span></div>
+          <div class="hist">${hist3.map((h, i) => `<div class="${i === hist3.length - 1 ? "cur" : ""}"><span class="m" style="display:block;color:var(--muted)">${h.label}</span><b>${fmt1(h.value)} tỷ</b></div>`).join("")}</div>
+          <div class="small">Sản lượng <b style="color:var(--text)">${fmt1(volTan)} tấn</b></div>
+          <div class="growth ${dcls(g)}" style="margin-top:6px">${arrow(g)} ${fmt1(g)}%</div>
+        </div>`;
+      }).join("")}
+      </div>
+    </div>`;
+  }
+
+  function elHieuQuaQLTP() {
+    let base = DATA.qltp;
+    if (STATE.qltp !== "all") base = base.filter((q) => q.code === STATE.qltp);
+    const rows = base.map((q) => {
+      const s = qltpSeries(q);
+      const rowHist = last3(s.rev, s.labels);
+      const p = pctHT(rowHist[2].value, s.target);
+      const gap = rowHist[2].value - s.target;
+      const growth = s.rev[s.prev] ? ((s.rev[s.cur] - s.rev[s.prev]) / s.rev[s.prev]) * 100 : 0;
+      const freshHist = last3(s.fresh, s.labels);
+      const freshGrowth = growthOfHist(freshHist);
+      const gtb = (i) => giaTriBillNghin(s.rev[i], s.bill[i], s.daysInPeriod);
+      const billGrowth = s.bill[s.prev] ? ((s.bill[s.cur] - s.bill[s.prev]) / s.bill[s.prev]) * 100 : 0;
+      const abvGrowth = gtb(s.prev) ? ((gtb(s.cur) - gtb(s.prev)) / gtb(s.prev)) * 100 : 0;
+      return { q, rowHist, growth, pct: p, gap, freshGrowth, billGrowth, abvGrowth };
+    }).sort((a, b) => b.growth - a.growth);
+    const hLabels = rows.length ? [rows[0].rowHist[0].label, rows[0].rowHist[1].label, rows[0].rowHist[2].label] : (STATE.period === "month" ? MONTH_LABELS : WEEK_LABELS);
+    return `
+    <div class="panel">
+      <div class="panelhead"><div><h2>Hiệu quả Quản lý Tiên phong (QLTP)</h2><p>3 kỳ liên kế, tăng trưởng cùng kỳ, %HT Target và doanh thu dư/thiếu · xếp theo tăng trưởng cao → thấp</p></div><span class="pill">${rows.length}/${DATA.qltp.length} QLTP</span></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>QLTP</th><th>${hLabels[0]}</th><th>${hLabels[1]}</th><th>${hLabels[2]}</th><th>DT cùng kỳ</th><th>%HT Target</th><th>DT dư/thiếu</th><th>Trạng thái</th><th>Bill cùng kỳ</th><th>Giá trị bill</th><th>Fresh cùng kỳ</th></tr></thead>
+        <tbody>${rows.map((r) => {
+          const st = statusTier(r.pct);
+          return `<tr>
+          <td><b>${r.q.code} · ${r.q.name}</b><div class="small">${r.growth >= 0 ? "Kéo miền lên" : "Kéo miền xuống"}</div></td>
+          <td>${fmt1(r.rowHist[0].value)} tỷ</td><td>${fmt1(r.rowHist[1].value)} tỷ</td><td><b>${fmt1(r.rowHist[2].value)} tỷ</b></td>
+          <td class="${dcls(r.growth)}">${pct(r.growth)}</td>
+          <td><b>${fmt1(r.pct)}%</b></td>
+          <td class="${dcls(r.gap)}">${r.gap >= 0 ? "+" : ""}${fmt1(r.gap)} tỷ<div class="small">${r.gap >= 0 ? "Dư" : "Thiếu"}</div></td>
+          <td><span class="status-badge ${st.cls}">${st.label}</span></td>
+          <td class="${dcls(r.billGrowth)}">${pct(r.billGrowth)}</td>
+          <td class="${dcls(r.abvGrowth)}">${pct(r.abvGrowth)}</td>
+          <td class="${dcls(r.freshGrowth)}">${pct(r.freshGrowth)}</td>
+        </tr>`;
+        }).join("")}</tbody>
+      </table></div>
+    </div>`;
+  }
+
+  function elFreshTheoQLTP() {
+    let base = DATA.qltp;
+    if (STATE.qltp !== "all") base = base.filter((q) => q.code === STATE.qltp);
+    const fresh4 = DATA.fresh4;
+    const rows = base.map((q) => {
+      const s = qltpSeries(q);
+      const hist = last3(s.fresh, s.labels).map((h) => ({ label: h.label, value: h.value / 1000 })); // kg -> tấn
+      const g = growthOfHist(hist);
+      const delta = hist[2].value - hist[1].value;
+      return { q, hist, g, delta };
+    });
+    const maxG = Math.max(...rows.map((r) => r.g));
+    const worst3 = [...rows].sort((a, b) => a.g - b.g).slice(0, Math.min(3, rows.length))
+      .filter((r) => r.g < 0).map((r) => r.q.code);
+    const hLabels = rows.length ? [rows[0].hist[0].label, rows[0].hist[1].label, rows[0].hist[2].label] : (STATE.period === "month" ? MONTH_LABELS : WEEK_LABELS);
+    // File chưa tách Fresh theo nhóm hàng ở cấp QLTP — chỉ có ở cấp Miền (fresh4), nên trả lời
+    // "tăng ở nhóm hàng nào" bằng đúng số liệu thật cấp Miền thay vì suy diễn riêng cho từng QLTP.
+    const topUp = [...fresh4].sort((a, b) => b.g - a.g)[0];
+    const topDown = [...fresh4].sort((a, b) => a.g - b.g)[0];
+    return `
+    <div class="panel">
+      <div class="panelhead"><div><h2>Fresh theo QLTP</h2><p>Cột chênh lệch (tấn) so với kỳ trước và cảnh báo 3 QLTP giảm Fresh mạnh nhất so cùng kỳ</p></div><span class="pill">So với cùng kỳ</span></div>
+      <div class="footnote" style="background:var(--gray-bg);border-radius:8px;padding:10px 12px;margin-bottom:12px">📈 Toàn Miền (cấp nhóm hàng chỉ có ở Miền, file chưa tách theo QLTP): <b class="up">${topUp.name} tăng mạnh nhất (${pct(topUp.g)})</b> · <b class="down">${topDown.name} giảm mạnh nhất (${pct(topDown.g)})</b> so với cùng kỳ.</div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>QLTP</th><th>${hLabels[0]}</th><th>${hLabels[1]}</th><th>${hLabels[2]}</th><th>Chênh lệch</th><th>Fresh cùng kỳ</th><th>Cảnh báo</th></tr></thead>
+        <tbody>${rows.map((r) => {
+          const cur = r.hist[2].value;
+          const bg = worst3.includes(r.q.code) ? "background:var(--danger-bg)" : r.g === maxG ? "background:var(--green-bg)" : "";
+          return `<tr style="${bg}"><td><b>${r.q.name}</b></td><td>${fmt1(r.hist[0].value)} tấn</td><td>${fmt1(r.hist[1].value)} tấn</td><td><b>${fmt1(cur)} tấn</b></td>
+          <td class="${dcls(r.delta)}">${r.delta >= 0 ? "+" : ""}${fmt1(r.delta)} tấn</td>
+          <td class="${dcls(r.g)}">${pct(r.g)}</td>
+          <td>${worst3.includes(r.q.code) ? `<span class="status-badge danger">⚠ Giảm mạnh</span>` : ""}</td></tr>`;
+        }).join("")}</tbody>
+      </table></div>
+    </div>`;
+  }
+
+  function elBasketOverview() {
+    const s = mienSeries();
+    const totalCur = s.rev[s.cur], totalPrev = s.rev[s.prev];
+    const totalGrowth = totalPrev ? ((totalCur - totalPrev) / totalPrev) * 100 : null;
+    const totalShops = DATA.stores.length;
+    const cards = BASKET_LIST.map((b) => {
+      const cur = basketRevForPeriod(b.key), prev = basketPrevRevForPeriod(b.key);
+      const growth = prev ? ((cur - prev) / prev) * 100 : null;
+      const st = (growth ?? 0) >= 0 ? { label: "Hiệu quả", cls: "ok" } : { label: "Cảnh báo", cls: "danger" };
+      return `<div class="blockcard ${STATE.basket === b.key ? "basket-active" : ""}" style="cursor:pointer" onclick="App.setBasket('${b.key}')">
+        <div class="bh"><span>${b.icon} ${b.label}</span><span class="share">${b.n} shop</span></div>
+        <div style="font-size:21px;font-weight:800;margin:6px 0">${fmt1(cur)} tỷ</div>
+        <div class="growth ${dcls(growth)}">${arrow(growth)} ${growth === null ? "—" : fmt1(Math.abs(growth)) + "%"} so cùng kỳ</div>
+        <span class="status-badge ${st.cls}" style="margin-top:8px;display:inline-block">${st.label}</span>
+      </div>`;
+    }).join("");
+    return `
+    <div class="panel">
+      <div class="panelhead"><div><h2>4 nhóm vị trí cạnh tranh (mặt bằng)</h2><p>Xem đồng thời cả 4 nhóm — bấm vào 1 nhóm để xem chi tiết và Bottom 10 siêu thị của nhóm đó. Đây là phân loại vị trí mặt bằng duy nhất trong file thật (King/Maxidi/Gần chợ/Cụm dân cư) · kỳ: ${STATE.period === "month" ? "tháng" : "tuần"}.</p></div></div>
+      <div class="blockcard" style="background:var(--dark);border-color:var(--dark);color:#fff;margin-bottom:14px;cursor:default;">
+        <div class="bh"><span style="color:#fff">📊 Tổng toàn miền · độc lập, không thuộc 4 nhóm bên dưới</span><span class="share" style="color:#cfe3da">${totalShops} shop</span></div>
+        <div style="font-size:23px;font-weight:800;margin:6px 0;color:#fff">${fmt1(totalCur)} tỷ</div>
+        <div style="font-weight:700;font-size:12.5px;color:${(totalGrowth ?? 0) >= 0 ? "#8fe0b0" : "#ffb3b3"}">${arrow(totalGrowth)} ${totalGrowth === null ? "—" : fmt1(Math.abs(totalGrowth)) + "%"} so cùng kỳ</div>
+      </div>
+      <div class="grid4">${cards}</div>
+    </div>`;
+  }
+
+  function elBasketDetail() {
+    const b = basketOf(STATE.basket);
+    const cur = basketRevForPeriod(b.key), prev = basketPrevRevForPeriod(b.key);
+    const growth = prev ? ((cur - prev) / prev) * 100 : 0;
+    const s = mienSeries();
+    let candidates = DATA.stores.filter((s2) => s2.vitri_key === STATE.basket);
+    if (STATE.qltp !== "all") candidates = candidates.filter((s2) => s2.qltp_code === STATE.qltp);
+    if (STATE.store !== "all") candidates = candidates.filter((s2) => String(s2.id) === String(STATE.store));
+    const worst = [...candidates].sort((a, b2) => (storeGrowthForPeriod(a) ?? 0) - (storeGrowthForPeriod(b2) ?? 0)).slice(0, 10);
+    return `
+    <div class="panel">
+      <div class="panelhead"><div><div class="eyebrow2">CHI TIẾT NHÓM ĐANG XEM</div><h2>${b.icon} ${b.label}</h2><p>${b.n} shop trên tổng ${DATA.stores.length} shop toàn miền</p></div></div>
+      <div class="grid3">
+        <div class="blockcard"><div class="bh">DOANH THU · ${s.labels[s.prev]}</div><div style="font-size:20px;font-weight:800;margin-top:6px">${fmt1(prev)} tỷ</div></div>
+        <div class="blockcard"><div class="bh">DOANH THU · ${s.labels[s.cur]}</div><div style="font-size:20px;font-weight:800;margin-top:6px">${fmt1(cur)} tỷ</div></div>
+        <div class="blockcard" style="display:flex;flex-direction:column;justify-content:center;align-items:center">
+          <span class="status-badge ${growth >= 0 ? "ok" : "danger"}">${growth >= 0 ? "✓ HIỆU QUẢ" : "⚠ CẢNH BÁO"}</span>
+          <div style="margin-top:8px" class="${dcls(growth)}">${arrow(growth)} ${fmt1(Math.abs(growth))}% so cùng kỳ</div>
         </div>
       </div>
-      <div style="text-align:right;">
-        <div style="font-size:28px; font-weight:700; color:var(--c-green);">95.2%</div>
-        <div style="font-size:11px; color:var(--muted-2);">Hoàn thành tháng 7</div>
+      <h2 style="font-size:15px;margin:20px 0 10px">Bottom 10 siêu thị · ${b.label}${STATE.qltp !== "all" ? " · QLTP " + qltpByCode(STATE.qltp).name : ""}</h2>
+      <p class="footnote" style="margin-top:-4px">Cột Bill / Giá trị bill là ước tính phân rã từ tăng trưởng doanh thu thật của từng siêu thị, theo đúng tỉ lệ Bill/Giá trị bill mà QLTP quản lý đang ghi nhận (file chưa có Bill/Giá trị bill kỳ trước ở cấp từng siêu thị).</p>
+      ${worst.length ? `<div class="tablewrap"><table>
+        <thead><tr><th>#</th><th>Siêu thị</th><th>QLTP phụ trách</th><th>Quận</th><th>Doanh thu</th><th>Tăng trưởng</th><th>Do Bill</th><th>Do Giá trị bill</th><th>Nhận xét điều hành</th></tr></thead>
+        <tbody>${worst.map((s2, i) => {
+          const growth2 = storeGrowthForPeriod(s2);
+          const split = storeDriverSplit(s2);
+          return `<tr>
+          <td>${i + 1}</td><td><b>${s2.id} · ${s2.name}</b></td><td>${s2.qltp_name}</td><td>${s2.quan || "—"}</td>
+          <td>${fmt1(storeRevForPeriod(s2))} tỷ</td><td class="${dcls(growth2)}">${arrow(growth2)} ${growth2 === null ? "mới mở" : fmt1(Math.abs(growth2)) + "%"}</td>
+          <td class="${dcls(split.bill)}">${pct(split.bill)}</td>
+          <td class="${dcls(split.abv)}">${pct(split.abv)}</td>
+          <td><span class="status-badge ${growth2 === null ? "new" : growth2 < 0 ? "danger" : "watch"}">${growth2 === null ? "Mới mở" : growth2 < 0 ? "Cảnh báo" : "Tăng chậm nhất nhóm"}</span></td>
+        </tr>`;
+        }).join("")}</tbody>
+      </table></div>` : `<div class="footnote">Không có siêu thị nào khớp bộ lọc hiện tại (QLTP/Siêu thị) trong nhóm ${b.label}.</div>`}
+    </div>`;
+  }
+
+  function elDiemNghen() {
+    const rows = decisionRowsMien().filter((r) => r.color === "do");
+    return `
+    <div class="panel" id="sec-diemnghen">
+      <div class="panelhead"><div><div class="eyebrow2">⚑ ĐIỂM NGHẼN</div><h2>Điểm nghẽn đang kéo dài ≥ 2 kỳ liên tiếp</h2><p>Tổng hợp các vấn đề Đỏ chưa cải thiện qua nhiều kỳ cập nhật gần nhất — ưu tiên xử lý trước tiên</p></div></div>
+      ${rows.length ? rows.map((r) => `<div class="bottleneck-card">
+        <div class="bt-h">🚩 ${r.name} — thiếu ${fmt1(Math.abs(r.gap))} tỷ so target, ${r.driverLabel.toLowerCase()}</div>
+        <div class="bt-m">Nguyên nhân gốc: ${r.driverLabel} · Nơi phát sinh: ${r.nganh} · Hành động: ${r.action} · Phụ trách: ${r.owner}</div>
+      </div>`).join("") : `<div class="footnote">Không có vấn đề Đỏ nào trong phạm vi đang lọc.</div>`}
+      <div class="footnote">* Đánh dấu "kéo dài ≥2 kỳ" dựa trên nhóm Đỏ của kỳ hiện tại. Khi có dữ liệu nhiều kỳ liên tiếp hơn, sẽ so sánh trực tiếp lịch sử để xác nhận đúng số kỳ liên tiếp.</div>
+    </div>`;
+  }
+
+  // ---------- QLTP tab ----------
+  function elScenarioPanel(q) {
+    const s = qltpSeries(q);
+    const cur = s.rev[s.cur];
+    const cungky = cur / (1 + q.growth_pct / 100);
+    const target5 = cungky * 1.05;
+    const gap = cur - target5;
+    const needGrowthPct = ((target5 - cur) / cur) * 100;
+    return `
+    <div class="panel dark">
+      <div class="panelhead">
+        <div><div class="eyebrow2">KỊCH BẢN TĂNG TRƯỞNG KHU VỰC</div><h2>Mỗi QLTP cần thay đổi Bill và Giá trị bill bao nhiêu để đạt +5%?</h2><p>Mục tiêu neo theo doanh thu cùng kỳ; hệ thống tính ngược phương án phù hợp với hướng tháng hiện tại</p></div>
+        <span class="pill" style="background:rgba(255,255,255,.15);color:#fff">QLTP đang xem: ${q.code} · ${q.name}</span>
       </div>
-    </div>
-
-    <div class="stat-row">
-      <div class="stat-card"><div class="label">Lũy kế T7</div><div class="value">360,077</div><div class="sub">triệu đồng</div></div>
-      <div class="stat-card"><div class="label">Target T7</div><div class="value">451,104</div><div class="sub">triệu đồng</div></div>
-      <div class="stat-card"><div class="label">So tuần trước</div><div class="value green">▲ 6.4%</div><div class="sub">338.4tr → 360.1tr</div></div>
-      <div class="stat-card"><div class="label">So tháng trước</div><div class="value green">▲ 3.3%</div><div class="sub">luỹ kế năm 93.4%</div></div>
-    </div>
-
-    <div class="update-strip">🕐 Cập nhật báo cáo: <b>27/07/2026 - 12:00</b><span class="dot-sep">·</span>📅 Định kỳ xem tối thiểu: <b>Thứ 2 &amp; Thứ 5 hàng tuần</b></div>
-    <div class="source-bar">
-      <span class="source-link disabled">🔗 Link HĐ — chưa có, cần dán vào bảng gốc</span>
-      <span class="source-link disabled">📊 Link BC — chưa có, cần dán vào bảng gốc</span>
-    </div>
-
-    <div class="topic-section">
-      <div class="topic-section-title">Chi tiết theo QLTP</div>
-      <div class="topic-section-sub">Tổng miền: 360,077 / 451,104 triệu — đơn vị: triệu đồng</div>
-      <table>
-        <tr><th>QLTP</th><th>Lũy kế T7</th><th>Target T7</th><th>% HT T7</th><th>Tình trạng</th></tr>
-        <tr><td>21445 · Tấn Phát</td><td>23,121</td><td>29,674</td><td>92.9%</td><td><span class="pill ok">Theo dõi</span></td></tr>
-        <tr><td>55321 · Cẩm Trinh</td><td>30,586</td><td>37,593</td><td>97.0%</td><td><span class="pill ok">Theo dõi</span></td></tr>
-        <tr><td>27506 · Bá Thành</td><td>28,013</td><td>35,529</td><td>94.0%</td><td><span class="pill ok">Theo dõi</span></td></tr>
-        <tr><td>43052 · Thanh Nga</td><td>31,884</td><td>41,338</td><td>92.0%</td><td><span class="pill ok">Theo dõi</span></td></tr>
-        <tr><td>48431 · Tấn Đạt</td><td>34,414</td><td>46,060</td><td>89.1%</td><td><span class="pill watch">Theo dõi</span></td></tr>
-        <tr><td>49559 · Quốc Liêm</td><td>40,747</td><td>46,550</td><td>104.4%</td><td><span class="pill ok">Theo dõi</span></td></tr>
-        <tr><td>56779 · Xuân Nam</td><td>42,230</td><td>52,752</td><td>95.4%</td><td><span class="pill ok">Theo dõi</span></td></tr>
-        <tr><td>88365 · Đình Thuận</td><td>53,680</td><td>64,212</td><td>99.7%</td><td><span class="pill ok">Theo dõi</span></td></tr>
-        <tr><td>24008 · Minh Nhật</td><td>59,021</td><td>77,521</td><td>90.8%</td><td><span class="pill watch">Theo dõi</span></td></tr>
-        <tr><td>122824 · Ngọc Anh</td><td>7,953</td><td>9,198</td><td>103.1%</td><td><span class="pill ok">Về đích</span></td></tr>
-        <tr><td>84687 · Thành Sự</td><td>8,428</td><td>10,676</td><td>94.1%</td><td><span class="pill ok">Theo dõi</span></td></tr>
-      </table>
-    </div>
-
-    <div class="topic-section">
-      <div class="topic-section-title">Điểm nghẽn lớn nhất</div>
-      <div class="action-card">
-        <div style="font-weight:700; font-size:14px;">Push sale bơ/dứa/dưa lặp 3 tuần liên tiếp không cải thiện (🚩)</div>
-        <div class="action-row">
-          <div><b>Hành động:</b> Đối soát thực địa / xem camera lùi ngày</div>
-          <div><b>Người phụ trách:</b> Nguyễn Xuân Nam</div>
-          <div><b>Hạn xử lý:</b> Ngay tuần này</div>
-        </div>
+      <div class="grid4">
+        <div class="blockcard" style="border-color:rgba(255,255,255,.2);color:#fff"><div class="small" style="color:#cfe3da">DOANH THU CÙNG KỲ</div><div style="font-size:22px;font-weight:800">${fmt1(cungky)} tỷ</div><div class="small" style="color:#cfe3da">Điểm gốc đặt mục tiêu</div></div>
+        <div class="blockcard" style="border-color:rgba(255,255,255,.2);color:#fff"><div class="small" style="color:#cfe3da">MỤC TIÊU +5%</div><div style="font-size:22px;font-weight:800">${fmt1(target5)} tỷ</div><div class="small" style="color:#cfe3da">+${fmt1(target5 - cungky)} tỷ so cùng kỳ</div></div>
+        <div class="blockcard" style="border-color:rgba(255,255,255,.2);color:#fff"><div class="small" style="color:#cfe3da">DỰ KIẾN HIỆN TẠI</div><div style="font-size:22px;font-weight:800">${fmt1(cur)} tỷ</div><div class="small ${dcls(q.growth_pct)}">${pct(q.growth_pct)}</div></div>
+        <div class="blockcard" style="border-color:rgba(255,255,255,.2);color:#fff"><div class="small" style="color:#cfe3da">KHOẢNG CÁCH MỤC TIÊU</div><div style="font-size:22px;font-weight:800">${gap >= 0 ? "Vượt " + fmt1(gap) : "Thiếu " + fmt1(Math.abs(gap))} tỷ</div><div class="small" style="color:#cfe3da">${gap >= 0 ? "Đã đạt mục tiêu tăng trưởng" : "Cần tăng thêm " + fmt1(Math.abs(needGrowthPct)) + "%"}</div></div>
       </div>
-    </div>
-
-    <div class="topic-section">
-      <div class="topic-section-title">Tin tốt &amp; Tin chưa tốt</div>
-      <div class="news-grid2">
-        <div>
-          <div class="news-col-title good">✓ Tin tốt</div>
-          <ul class="news-list good">
-            <li>Luỹ kế T7 đạt 95.2% target tháng, cao hơn cùng kỳ 6.4%</li>
-            <li>Shop mới BTH vượt target 202% — mô hình có thể nhân rộng</li>
-            <li>9/11 QLTP đạt trạng thái "Theo dõi" ổn định, không cảnh báo</li>
-          </ul>
-        </div>
-        <div>
-          <div class="news-col-title bad">! Tin chưa tốt</div>
-          <ul class="news-list bad">
-            <li>Push sale bơ/dứa/dưa lặp 3 tuần liên tiếp không cải thiện (🚩)</li>
-            <li>Shop mới TDU chỉ đạt 86% target tháng, cần push</li>
-            <li>Shop mới BTA đạt 78%, thấp nhất trong nhóm shop mới</li>
-          </ul>
-        </div>
+      <div class="scenario3">
+        <div class="scard" style="border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff"><div class="stag">Chỉ tăng Bill</div>
+          <div class="seq"><div class="box">${fmt1(Math.abs(needGrowthPct))}%</div><span>×</span><div class="box">0%</div><span>=</span><div class="box">${fmt1(Math.abs(needGrowthPct))}%</div></div>
+          <div class="small" style="color:#cfe3da;margin-top:6px">Giữ nguyên giá trị bill hiện tại</div></div>
+        <div class="scard" style="border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff"><div class="stag">Chỉ tăng giá trị bill</div>
+          <div class="seq"><div class="box">0%</div><span>×</span><div class="box">${fmt1(Math.abs(needGrowthPct))}%</div><span>=</span><div class="box">${fmt1(Math.abs(needGrowthPct))}%</div></div>
+          <div class="small" style="color:#cfe3da;margin-top:6px">Giữ nguyên lượng bill hiện tại</div></div>
+        <div class="scard reco" style="color:#0b3d30"><div class="stag" style="color:#8a6100">Đề xuất theo xu hướng</div>
+          <div class="seq"><div class="box">${Math.abs(q.bill_growth) < Math.abs(q.abv_growth) ? "+0%" : fmt1(Math.abs(needGrowthPct)) + "%"}</div><span>×</span><div class="box">${Math.abs(q.bill_growth) < Math.abs(q.abv_growth) ? fmt1(Math.abs(needGrowthPct)) + "%" : "+0%"}</div><span>=</span><div class="box">${fmt1(Math.abs(needGrowthPct))}%</div></div>
+          <div class="small" style="margin-top:6px">Ưu tiên ${Math.abs(q.bill_growth) < Math.abs(q.abv_growth) ? "Giá trị bill" : "Bill"}</div></div>
       </div>
+      <div class="note-box">Nhận xét tự động: ${Math.abs(q.bill_growth) < Math.abs(q.abv_growth)
+        ? `Lượt bill đang tăng ${fmt1(Math.abs(q.bill_growth))}% nhưng giá trị bill ${q.abv_growth >= 0 ? "tăng chậm" : "giảm"} ${fmt1(Math.abs(q.abv_growth))}%. Nên tận dụng lượng khách hiện có để tăng số SKU và giá trị giỏ hàng.`
+        : `Giá trị bill đang ổn định nhưng lượt bill ${q.bill_growth >= 0 ? "tăng chậm" : "giảm"} ${fmt1(Math.abs(q.bill_growth))}%. Ưu tiên phục hồi lượt khách trước khi đẩy giỏ hàng.`}</div>
+    </div>`;
+  }
+
+  function elDecisionQltp(q) {
+    const rows = decisionRowsQltp(q.code);
+    const nStores = scopedStores(q.code).length;
+    const nBelow = rows.filter((r) => r.gap < 0).length;
+    const totalGap = rows.reduce((s, r) => s + Math.max(0, -r.gap), 0);
+    const heading = nBelow > 0 ? "Siêu thị nào cần xử lý để khu vực đạt mục tiêu +5%?" : "Cả khu vực đã đạt Target — đây là 4 siêu thị có dư địa tăng trưởng thấp nhất";
+    return `
+    <div class="panel">
+      <div class="panelhead">
+        <div><div class="eyebrow2">TRUNG TÂM QUYẾT ĐỊNH · QLTP ${q.name}</div><h2>${heading}</h2><p>Xếp ưu tiên theo khoảng doanh thu thiếu và động lực Bill/Giá trị bill · kỳ: ${STATE.period === "month" ? "tháng" : "tuần"}</p></div>
+        <div class="decision-total"><div class="n">${fmt1(totalGap)} tỷ</div><div class="l">${nBelow}/${nStores} siêu thị chưa đạt Target</div></div>
+      </div>
+      ${rows.length ? `<div class="tablewrap"><table>
+        <thead><tr><th>Ưu tiên</th><th>Siêu thị</th><th>Thiếu/Vượt Target</th><th>Vị trí</th><th>Tăng trưởng</th><th>Quyết định / hành động</th></tr></thead>
+        <tbody>${rows.map((r, i) => `<tr>
+          <td><div class="prio ${r.gap < 0 ? r.color : "xam"}">${i + 1}</div></td>
+          <td><b>${r.name}</b></td>
+          <td class="${r.gap < 0 ? "neg" : "pos"}">${r.gap < 0 ? "↓" : "↑"} ${fmt1(Math.abs(r.gap))} tỷ</td>
+          <td>${r.vitri}</td>
+          <td class="${dcls(r.growth)}">${pct(r.growth)}</td>
+          <td>${r.gap < 0 ? "Phục hồi lượt bill · rà soát OOS/giá" : "Duy trì đà tăng, nhân rộng cách làm"}</td>
+        </tr>`).join("")}</tbody>
+      </table></div>` : `<div class="footnote">Không có siêu thị nào khớp bộ lọc hiện tại.</div>`}
+    </div>`;
+  }
+
+  function elStoreTable(q) {
+    const allStores = scopedStores(q.code);
+    const stores = allStores.filter((s) => STATE.ro === "all" || s.vitri_key === STATE.ro);
+    const total = stores.reduce((s, x) => s + storeRevForPeriod(x), 0);
+    const totalBill = stores.reduce((s, x) => s + x.bill / (DATA.meta.ngay_da_co || 15), 0);
+    const totalFresh = stores.reduce((s, x) => {
+      const ratio = STATE.period === "month" ? 1 : (q.fresh_week && q.fresh_month[2] ? q.fresh_week[3] / q.fresh_month[2] : 0.23);
+      return s + x.fresh_sl * ratio;
+    }, 0);
+    return `
+    <div class="panel" id="sec-qltp-shop">
+      <div class="panelhead"><div><div class="eyebrow2">HIỆU QUẢ SIÊU THỊ & 4 NHÓM VỊ TRÍ</div><h2>Hiệu quả trong siêu thị · ${q.name}</h2><p>Chọn nhóm vị trí mặt bằng (KingFood / Maxidi / Gần chợ truyền thống / Shop trong Cụm DC) để xem đúng nhóm siêu thị; chọn All để xem toàn khu vực · kỳ: ${STATE.period === "month" ? "tháng" : "tuần"}</p></div><span class="pill">${stores.length} siêu thị</span></div>
+      <div class="grid4" style="margin-bottom:14px">
+        <div class="blockcard"><div class="small">DOANH THU DỰ KIẾN</div><div style="font-size:20px;font-weight:800">${fmt1(total)} tỷ</div></div>
+        <div class="blockcard"><div class="small">LƯỢT BILL</div><div style="font-size:20px;font-weight:800">${fmtInt(totalBill)} bill/ngày</div></div>
+        <div class="blockcard"><div class="small">SẢN LƯỢNG FRESH</div><div style="font-size:20px;font-weight:800">${fmtInt(totalFresh)} kg</div></div>
+        <div class="blockcard"><div class="small">GIÁ TRỊ BILL</div><div style="font-size:20px;font-weight:800">${fmtInt(giaTriBillNghin(total, totalBill, STATE.period === "month" ? DAYS_MONTH : 7))} nghìn</div></div>
+      </div>
+      <div class="rofilters">
+        <button class="${STATE.ro === "all" ? "on" : ""}" onclick="App.setRo('all')">All</button>
+        ${BASKET_LIST.map((b) => `<button class="${STATE.ro === b.key ? "on" : ""}" onclick="App.setRo('${b.key}')">${b.icon} ${b.label}</button>`).join("")}
+      </div>
+      ${stores.length ? `<div class="tablewrap"><table>
+        <thead><tr><th>Siêu thị</th><th>Vị trí</th><th>DT cùng kỳ</th><th>Target</th><th>Dự kiến</th><th>Tăng trưởng</th><th>%HT Target</th><th>Trạng thái</th><th>Nhận xét</th></tr></thead>
+        <tbody>${stores.map((s) => {
+          const rev = storeRevForPeriod(s);
+          const cungky = storePrevRevForPeriod(s);
+          const growth = storeGrowthForPeriod(s);
+          const realTarget = storeRealTargetForPeriod(s);
+          const p = pctHT(rev, realTarget);
+          const st = tierFor(rev, realTarget);
+          const pos = basketOf(s.vitri_key);
+          return `<tr><td><b>${s.id} · ${s.name}</b><div class="small">Quận: ${s.quan || "—"}</div></td>
+          <td>${pos ? pos.icon + " " + pos.label : "—"}</td>
+          <td>${fmt1(cungky)} tỷ</td><td>${realTarget ? fmt1(realTarget) + " tỷ" : "—"}</td><td>${fmt1(rev)} tỷ</td>
+          <td class="${dcls(growth)}">${growth === null ? "Mới mở" : pct(growth)}</td>
+          <td><b>${realTarget ? fmt1(p) + "%" : "—"}</b></td>
+          <td><span class="status-badge ${st.cls}">${st.label}</span></td>
+          <td>${!realTarget ? "Chưa có kỳ trước" : p >= 100 ? "Duy trì đà tăng" : "Phục hồi lượt bill"}</td></tr>`;
+        }).join("")}</tbody>
+      </table></div>` : `<div class="footnote">Không có siêu thị nào khớp bộ lọc hiện tại.</div>`}
+    </div>`;
+  }
+
+  function elFreshStoreTable(q) {
+    const allStores = scopedStores(q.code);
+    const stores = allStores.filter((s) => STATE.roFresh === "all" || s.vitri_key === STATE.roFresh);
+    const fresh4 = DATA.fresh4;
+    const avgG = fresh4.reduce((s, f) => s + f.share * f.g, 0);
+    return `
+    <div class="panel">
+      <div class="panelhead"><div><h2>Fresh theo siêu thị</h2><p>Chọn All hoặc 1 trong 4 nhóm vị trí mặt bằng · kèm doanh thu tăng/giảm (triệu đồng) bên cạnh %, tô xanh ngành hiệu quả nhất và đỏ ngành yếu nhất trong 4 ngành Fresh của từng siêu thị. Tỷ trọng theo từng nhóm hàng lấy theo cơ cấu Fresh toàn miền, áp dụng vào doanh thu thật của từng siêu thị (file chưa tách sản lượng theo nhóm hàng ở cấp siêu thị).</p></div></div>
+      <div class="rofilters">
+        <button class="${STATE.roFresh === "all" ? "on" : ""}" onclick="App.setRoFresh('all')">All</button>
+        ${BASKET_LIST.map((b) => `<button class="${STATE.roFresh === b.key ? "on" : ""}" onclick="App.setRoFresh('${b.key}')">${b.icon} ${b.label}</button>`).join("")}
+      </div>
+      ${stores.length ? `<div class="tablewrap"><table>
+        <thead><tr><th>Siêu thị</th><th>Fresh dự kiến</th>${fresh4.map((f) => `<th>${f.name}</th>`).join("")}</tr></thead>
+        <tbody>${stores.map((s) => {
+          const rev = storeRevForPeriod(s);
+          const revPrev = storePrevRevForPeriod(s);
+          const fresh = rev * DATA.cat3.fresh;
+          const cats = fresh4.map((f) => {
+            const g = s.growth === null ? f.g : s.growth + (f.g - avgG);
+            const cur = rev * f.share;
+            const prev = revPrev * f.share;
+            const deltaTrieu = (cur - prev) * 1000;
+            return { name: f.name, g, deltaTrieu };
+          });
+          const maxG = Math.max(...cats.map((c) => c.g));
+          const minG = Math.min(...cats.map((c) => c.g));
+          const cell = (c) => {
+            const bg = c.g === maxG ? "background:var(--green-bg)" : c.g === minG ? "background:var(--danger-bg)" : "";
+            return `<td style="${bg}"><span class="${dcls(c.deltaTrieu)}">${c.deltaTrieu >= 0 ? "+" : ""}${fmtInt(c.deltaTrieu)} triệu</span><div class="small ${dcls(c.g)}">${pct(c.g)}</div></td>`;
+          };
+          const pos = basketOf(s.vitri_key);
+          return `<tr><td><b>${s.id} · ${s.name}</b><div class="small">${pos ? pos.label : "—"}</div></td><td>${fmt1(fresh)} tỷ</td>
+          ${cats.map(cell).join("")}</tr>`;
+        }).join("")}</tbody>
+      </table></div>` : `<div class="footnote">Không có siêu thị nào khớp bộ lọc hiện tại.</div>`}
+    </div>`;
+  }
+
+  // ---------- page assembly ----------
+  function renderMienTab() {
+    const s = mienSeries();
+    return `
+      ${kpiRowFor(s)}
+      <div id="sec-quyetdinh">${elDecisionCenterMien()}</div>
+      ${elTrendPanel("Diễn biến doanh thu · lượt bill · sản lượng Fresh", "Miền Trung Đức",
+        { rev: DATA.mien_rev_month_full || DATA.mien_rev_month, bill: DATA.mien_bill_month_full || DATA.mien_bill_month, fresh: DATA.mien_fresh_month,
+          note: "Doanh thu · Bill ở đây là TỔNG TOÀN MIỀN (tất cả siêu thị, kể cả nhóm đang chờ gán QLTP) nên có thể chênh nhẹ so với số ở các mục theo dõi Target/QLTP bên dưới (chỉ cộng 11 QLTP đã đặt Target)." },
+        { rev: DATA.mien_rev_week, bill: mienWeeklyBill(), fresh: mienWeeklyFresh() })}
+      <div id="sec-nganh">
+      ${elCoCau3Khoi(s, "Ba kỳ liên kế và tăng trưởng doanh thu so với cùng kỳ")}
+      ${elTop5("khu vực")}
+      ${elFreshNganh(s, "toàn miền")}
+      </div>
+      <div id="sec-qltp">
+      ${elHieuQuaQLTP()}
+      ${elFreshTheoQLTP()}
+      ${elBasketOverview()}
+      ${elBasketDetail()}
+      </div>
+      ${elDiemNghen()}
+      <div class="footnote">Số liệu thật, trích xuất & đối chiếu từ file BC DTHU THU THÁNG.xlsx (nguồn OneDrive BC DOANH THU) — cập nhật đến ${DATA.meta.ngay_cap_nhat || "—"}. Bộ lọc QLTP/Siêu thị/Ngành hàng/Nhóm hàng ở trên áp dụng cho toàn bộ các phần bên dưới.</div>
+    `;
+  }
+
+  function elKpiRowQltp(q) { return kpiRowFor(qltpSeries(q)); }
+
+  function renderQltpTabFull() {
+    const q = qltpByCode(effectiveQltpCode());
+    const s = qltpSeries(q);
+    return `
+      ${elScenarioPanel(q)}
+      ${elKpiRowQltp(q)}
+      <div id="sec-qltp2-quyetdinh">${elDecisionQltp(q)}</div>
+      ${elTrendPanel("Diễn biến doanh thu · lượt bill · sản lượng Fresh", `Khu vực ${q.name}`,
+        { rev: q.rev_month, bill: q.bill_month, fresh: q.fresh_month },
+        { rev: q.rev_week, bill: q.bill_week, fresh: q.fresh_week })}
+      <div id="sec-qltp2-nganh">
+      ${elCoCau3Khoi(s, `Giữ nguyên cấu trúc bảng Miền · số liệu riêng QLTP ${q.name}`)}
+      ${elTop5("khu vực")}
+      ${elFreshNganh(s, "trong khu vực")}
+      </div>
+      ${elStoreTable(q)}
+      ${elFreshStoreTable(q)}
+      <div class="footnote">Danh sách siêu thị lấy theo dữ liệu thật từ file BC DTHU THU THÁNG.xlsx.</div>
+    `;
+  }
+
+  function renderSidebar() {
+    const items = [
+      { icon: "▦", label: "Tổng quan miền", target: STATE.tab === "mien" ? "sec-quyetdinh" : "sec-qltp2-quyetdinh" },
+      { icon: "◫", label: "Ngành & nhóm hàng", target: STATE.tab === "mien" ? "sec-nganh" : "sec-qltp2-nganh" },
+      { icon: "◎", label: "QLTP & rổ shop", target: STATE.tab === "mien" ? "sec-qltp" : "sec-qltp-shop" },
+      { icon: "⚑", label: "Điểm nghẽn", target: "sec-diemnghen" },
+    ];
+    return `
+    <div class="brand">
+      <div class="logo">B</div>
+      <div><div class="name">BHX Analytics</div><div class="sub">ĐIỀU HÀNH MIỀN</div></div>
     </div>
+    ${items.map((it) => `<button class="navitem" onclick="App.scrollTo('${it.target}')"><span>${it.icon}</span> ${it.label}</button>`).join("")}
+    <div class="illus-box"><b>NGUỒN DỮ LIỆU</b><br/>BC DTHU THU THÁNG.xlsx · OneDrive BC DOANH THU · cập nhật đến ${DATA.meta.ngay_cap_nhat || "—"}.</div>
+    `;
+  }
+
+  function render() {
+    const app = document.getElementById("app");
+    app.innerHTML = `
+    <div class="layout">
+      <div class="sidebar">${renderSidebar()}</div>
+      <div class="main">
+        ${elHeader()}
+        ${elTabsAndFilters()}
+        ${STATE.tab === "mien" ? renderMienTab() : renderQltpTabFull()}
+      </div>
+    </div>`;
+  }
+
+  window.App = {
+    setTab(t) {
+      STATE.tab = t;
+      if (t === "qltp" && STATE.qltp === "all") STATE.qltp = DEFAULT_QLTP;
+      render();
+    },
+    setPeriod(p) { STATE.period = p; render(); },
+    setQltpFilter(code) { STATE.qltp = code; STATE.store = "all"; render(); },
+    setStoreFilter(id) { STATE.store = id; render(); },
+    setNganh(n) { STATE.nganh = n; STATE.nhom = "all"; render(); },
+    setNhom(n) { STATE.nhom = n; render(); },
+    setBasket(k) { STATE.basket = k; render(); },
+    setRo(r) { STATE.ro = r; render(); },
+    setRoFresh(r) { STATE.roFresh = r; render(); },
+    scrollTo(id) {
+      if (id.indexOf("sec-qltp2") === 0) {
+        STATE.tab = "qltp";
+        if (STATE.qltp === "all") STATE.qltp = DEFAULT_QLTP;
+      }
+      render();
+      requestAnimationFrame(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    },
+  };
+
+  render();
+})();
+
+</script>
+</div>
+<!-- ============ HẾT DASHBOARD DOANH THU ============ -->
   </div>
 
   <!-- ============ TAB: TARGET ============ -->
