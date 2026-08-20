@@ -221,8 +221,7 @@
 <div class="wrap">
 
   <div class="tabnav" id="tabnav">
-    <button class="tab-btn active" data-tab="tongquan" onclick="showTab('tongquan', this)">📡 Tổng quan</button>
-    <button class="tab-btn" data-tab="doanhthu" onclick="showTab('doanhthu', this)"><span class="dot" style="background:var(--c-green);"></span>Doanh thu</button>
+    <button class="tab-btn active" data-tab="doanhthu" onclick="showTab('doanhthu', this)"><span class="dot" style="background:var(--c-green);"></span>Doanh thu</button>
     <button class="tab-btn" data-tab="target" onclick="showTab('target', this)"><span class="dot" style="background:var(--c-gold);"></span>Target</button>
     <button class="tab-btn" data-tab="pl" onclick="showTab('pl', this)"><span class="dot" style="background:var(--c-gold);"></span>P&amp;L</button>
   </div>
@@ -236,7 +235,6 @@
 
 <script>
 const TAB_FILES = {
-  tongquan: 'tab-tongquan.html',
   doanhthu: 'tab-doanhthu.html',
   target: 'tab-target.html',
   pl: 'tab-pl.html'
@@ -268,7 +266,7 @@ async function loadAllTabs(){
   });
   // gan lai trang thai active dung nhu ban dau
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('tongquan').classList.add('active');
+  document.getElementById('doanhthu').classList.add('active');
 }
 
 function showTab(id, btn){
